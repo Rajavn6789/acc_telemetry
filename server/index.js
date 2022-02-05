@@ -38,6 +38,11 @@ const ReadPhysics = () => {
   result.packetId = reader.ReadUInt32();
   result.gas = reader.ReadFloat();
   result.brake = reader.ReadFloat();
+  result.fuel = reader.ReadFloat();
+  result.gear = reader.ReadUInt32();
+  result.rpm = reader.ReadUInt32();
+  result.steerAngle = reader.ReadFloat();
+  result.speed = reader.ReadFloat();
 
   return result;
 };
@@ -89,12 +94,14 @@ wss.on("connection", function connection(ws, request, client) {
     const result = {
       gas: physicsResult.gas,
       brake: physicsResult.brake,
-      session: graphicsResult.session,
-      status: graphicsResult.status,
+      speed: physicsResult.speed,
+      // session: graphicsResult.session,
+      // status: graphicsResult.status,
+      time: Date.now()
     };
     const resultString = JSON.stringify(result);
     ws.send(resultString);
-  }, 10);
+  }, 1);
 
 
   // ws.on("error", function message(data) {
