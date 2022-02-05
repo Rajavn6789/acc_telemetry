@@ -29,30 +29,33 @@ function App() {
 
 
   useInterval(() => {
-    // client.onopen = () => {
-    //   console.log('Server Connected');
-    // };
-
-    // client.onclose = () => {
-    //   console.log('Server Disconnected');
-    // };
-
-    // client.onmessage = (message) => {
-    //   const telemetryData = JSON.parse(message.data);
-    //   setData([...data, telemetryData]);
-    // };
     if(data){
-      if (data.length > 200) {
-        data.shift();
-      }
-      setData([
-        ...data,
-        { gas: Math.random(), brake: Math.random(), speed: Math.random() * 100, time: Date.now() },
-      ]);
+    client.onopen = () => {
+      console.log('Server Connected');
+    };
+
+    client.onclose = () => {
+      console.log('Server Disconnected');
+    };
+
+    client.onmessage = (message) => {
+      const telemetryData = JSON.parse(message.data);
+      setData([...data, telemetryData]);
+    };
+   
+      // if (data.length > 200) {
+      //   data.shift();
+      // }
+
+      // setData([
+      //   ...data,
+      //   { gas: Math.random(), brake: Math.random(), speed: Math.random() * 100, time: Date.now() },
+      // ]);
+   
     } else {
       console.log('data is not available')
     }
-  }, 1000 / 30);
+  }, 15);
 
   return (
     <div className="App">

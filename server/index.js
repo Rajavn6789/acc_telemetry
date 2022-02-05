@@ -79,6 +79,7 @@ wss.on("connection", function connection(ws, request, client) {
 
   ws.on("close", function close() {
     console.log("disconnected");
+    // TODO: Program a reconnect if server is out
     // setTimeout(function() {
     //   connect();
     // }, 3000);
@@ -94,9 +95,7 @@ wss.on("connection", function connection(ws, request, client) {
     const result = {
       gas: physicsResult.gas,
       brake: physicsResult.brake,
-      speed: physicsResult.speed,
-      // session: graphicsResult.session,
-      // status: graphicsResult.status,
+      speed: Math.round(physicsResult.speed),
       time: Date.now()
     };
     const resultString = JSON.stringify(result);

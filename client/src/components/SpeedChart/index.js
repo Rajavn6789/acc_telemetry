@@ -52,7 +52,7 @@ const SpeedChart = ({data}) => {
           )}
         ></AnimatedAxis>
 
-        <LineSeries dataKey="speed" stroke="red" data={data} {...speedAccessor} />
+        <LineSeries dataKey="speed" stroke="green" data={data} {...speedAccessor} />
       </XYChart>
     </>
   );
