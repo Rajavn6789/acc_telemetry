@@ -1,24 +1,18 @@
 import React from 'react';
-import {
-  LineSeries,
-  Axis,
-  XYChart,
-  Grid,
-} from '@visx/xychart';
-
+import { LineSeries, Axis, XYChart, Grid } from '@visx/xychart';
 
 const speedAccessor = {
   yAccessor: (d) => d.speed,
   xAccessor: (d) => d.time,
 };
 
-const SpeedChart = ({data}) => {
+const SpeedChart = ({ data }) => {
   return (
     <>
       <XYChart
         height={300}
         xScale={{ type: 'band' }}
-        yScale={{ type: 'linear' }}
+        yScale={{ type: 'linear', domain: [0, 300] }}
       >
         <rect x={0} y={0} width={'100%'} height={300} fill={'black'} />
         <Grid
@@ -31,7 +25,7 @@ const SpeedChart = ({data}) => {
         />
         <Axis
           orientation="left"
-          hideTicks
+          tickValues={[0, 50, 100, 150, 200, 250, 300]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -43,6 +37,7 @@ const SpeedChart = ({data}) => {
         <Axis
           orientation="right"
           hideTicks
+          tickValues={[0, 50, 100, 150, 200, 250, 300]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -52,7 +47,12 @@ const SpeedChart = ({data}) => {
           )}
         ></Axis>
 
-        <LineSeries dataKey="speed" stroke="green" data={data} {...speedAccessor} />
+        <LineSeries
+          dataKey="speed"
+          stroke="green"
+          data={data}
+          {...speedAccessor}
+        />
       </XYChart>
     </>
   );

@@ -42,7 +42,7 @@ const ABSTCChart = ({ data }) => {
       <XYChart
         height={300}
         xScale={{ type: 'band' }}
-        yScale={{ type: 'linear' }}
+        yScale={{ type: 'linear', domain: [0, 1] }}
       >
         <ChartBackground />
         <Grid
@@ -55,22 +55,22 @@ const ABSTCChart = ({ data }) => {
         />
         <Axis
           orientation="left"
-          hideTicks
+          tickValues={[0, 1]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
-                {formattedValue * 100}
+                {formattedValue }
               </text>
             </g>
           )}
         ></Axis>
         <Axis
           orientation="right"
-          hideTicks
+          tickValues={[0, 1]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
-                {formattedValue * 100}
+                {formattedValue }
               </text>
             </g>
           )}

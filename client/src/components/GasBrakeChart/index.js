@@ -23,7 +23,7 @@ const GasBrakeChart = ({data}) => {
       <XYChart
         height={300}
         xScale={{ type: 'band' }}
-        yScale={{ type: 'linear' }}
+        yScale={{ type: 'linear', domain: [0, 1] }}
       >
         <rect x={0} y={0} width={'100%'} height={300} fill={'black'} />
         <Grid
@@ -36,7 +36,7 @@ const GasBrakeChart = ({data}) => {
         />
         <Axis
           orientation="left"
-          hideTicks
+          tickValues={[0, 0.25, 0.5, 0.75, 1]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -47,7 +47,7 @@ const GasBrakeChart = ({data}) => {
         ></Axis>
         <Axis
           orientation="right"
-          hideTicks
+          tickValues={[0, 0.25, 0.5, 0.75, 1]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
