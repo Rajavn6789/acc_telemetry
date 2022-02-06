@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import {
   LineSeries,
-  AnimatedAxis,
+  Axis,
   XYChart,
   Grid,
 } from '@visx/xychart';
@@ -23,13 +23,13 @@ const SpeedChart = ({data}) => {
         <rect x={0} y={0} width={'100%'} height={300} fill={'black'} />
         <Grid
           rows={true}
-          columns={true}
+          columns={false}
           numTicks={10}
           strokeWidth={1}
           strokeOpacity={0.1}
           strokeDasharray="5,2"
         />
-        <AnimatedAxis
+        <Axis
           orientation="left"
           hideTicks
           tickComponent={({ formattedValue, ...tickProps }) => (
@@ -39,8 +39,8 @@ const SpeedChart = ({data}) => {
               </text>
             </g>
           )}
-        ></AnimatedAxis>
-        <AnimatedAxis
+        ></Axis>
+        <Axis
           orientation="right"
           hideTicks
           tickComponent={({ formattedValue, ...tickProps }) => (
@@ -50,7 +50,7 @@ const SpeedChart = ({data}) => {
               </text>
             </g>
           )}
-        ></AnimatedAxis>
+        ></Axis>
 
         <LineSeries dataKey="speed" stroke="green" data={data} {...speedAccessor} />
       </XYChart>

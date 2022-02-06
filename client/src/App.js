@@ -18,9 +18,9 @@ function App() {
   useEffect(() => {
     const filledArray = [...new Array(100)].map(() => {
       return {
-        gas:0.5,
-        brake:0.5,
-        speed: 150,
+        gas:0,
+        brake:0,
+        speed: 0,
         time: randomDate(new Date(2012, 0, 1), new Date())
       };
     });
@@ -40,12 +40,14 @@ function App() {
 
     client.onmessage = (message) => {
       const telemetryData = JSON.parse(message.data);
-      setData([...data, telemetryData]);
+      setData((oldArray ) => {
+        let clonedArr = [...oldArray];
+        if (clonedArr.length > 200) {
+          clonedArr.shift();
+        } 
+        return [...clonedArr, telemetryData]
+      });
     };
-   
-      // if (data.length > 200) {
-      //   data.shift();
-      // }
 
       // setData([
       //   ...data,
@@ -55,7 +57,7 @@ function App() {
     } else {
       console.log('data is not available')
     }
-  }, 15);
+  }, 1000/30);
 
   return (
     <div className="App">

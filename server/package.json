@@ -1,9 +1,21 @@
 {
+
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "@fynnix/node-easy-ipc": "^1.0.8",
     "binutils": "^0.1.0",
     "node-ipc": "^10.1.0",
     "save": "^2.4.0",
     "ws": "^8.4.2"
-  }
+  },
+  "keywords": [],
+  "author": "Rajavenkateshwaran S",
+  "license": "ISC",
+  "description": ""
 }
