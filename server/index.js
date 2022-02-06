@@ -393,6 +393,8 @@ const connect = () => {
         brake: physicsResult.brake,
         speed: Math.round(physicsResult.speedKmh),
         time: graphicsResult.iCurrentTime * 1000,
+        tc:physicsResult.tc,
+        abs:physicsResult.abs
       };
       const resultString = JSON.stringify(result);
       ws.send(resultString);
@@ -409,7 +411,7 @@ connectDebug = () => {
   setInterval(() => {
     const physicsResult = ReadPhysics();
     const graphicsResult = ReadGraphics();
-    console.log((graphicsResult.iCurrentTime) );
+    console.log((physicsResult.tc) );
   }, 100);
 };
 

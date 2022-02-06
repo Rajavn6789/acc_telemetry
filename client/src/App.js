@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import GasBrakeChart from "./components/GasBrakeChart"
 import SpeedChart from './components/SpeedChart';
+import ABSTCChart from './components/ABSTCChart';
 import { useInterval } from "./utils/hooks"
 import './App.css';
 
@@ -21,7 +22,9 @@ function App() {
         gas:0,
         brake:0,
         speed: 0,
-        time: randomDate(new Date(2012, 0, 1), new Date())
+        time: randomDate(new Date(2012, 0, 1), new Date()),
+        tc: 0,
+        abs:0,
       };
     });
     setData(filledArray)
@@ -63,6 +66,7 @@ function App() {
     <div className="App">
       <GasBrakeChart data={data}/>
       <SpeedChart data={data}/>
+      <ABSTCChart data={data} />
     </div>
   );
 }
