@@ -6,6 +6,8 @@ const speedAccessor = {
   xAccessor: (d) => d.time,
 };
 
+const tickValues = [0, 50, 100, 150, 200, 250, 300];
+
 const SpeedChart = ({ data }) => {
   return (
     <>
@@ -18,14 +20,14 @@ const SpeedChart = ({ data }) => {
         <Grid
           rows={true}
           columns={false}
-          numTicks={10}
+          numTicks={tickValues.length}
           strokeWidth={1}
           strokeOpacity={0.1}
           strokeDasharray="5,2"
         />
         <Axis
           orientation="left"
-          tickValues={[0, 50, 100, 150, 200, 250, 300]}
+          tickValues={tickValues}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -36,7 +38,7 @@ const SpeedChart = ({ data }) => {
         ></Axis>
         <Axis
           orientation="right"
-          tickValues={[0, 50, 100, 150, 200, 250, 300]}
+          tickValues={tickValues}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>

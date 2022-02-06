@@ -29,6 +29,8 @@ function App() {
         time: randomDate(new Date(2012, 0, 1), new Date()),
         tc: 0,
         abs: 0,
+        gear: 0,
+        rpm: 0
       };
     });
     setData(filledArray);
@@ -55,23 +57,24 @@ function App() {
         });
       };
 
-      setData((oldArray) => {
-        const telemetryData = {
-          gas: getRandomValue(0, 1),
-          brake: getRandomValue(0, 1),
-          speed: getRandomValue(0, 250),
-          time: Date.now(),
-          tc: getRandomTwoValues(0,1),
-          abs: getRandomTwoValues(0, 1),
-          gear: getRandomTwoValues(0, 6),
-          rpm: getRandomTwoValues(0, 9250)
-        };
-        let clonedArr = [...oldArray];
-        if (clonedArr.length > 200) {
-          clonedArr.shift();
-        }
-        return [...clonedArr, telemetryData];
-      });
+      // setData((oldArray) => {
+      //   const telemetryData = {
+      //     gas: getRandomValue(0, 1),
+      //     brake: getRandomValue(0, 1),
+      //     speed: getRandomValue(0, 250),
+      //     time: Date.now(),
+      //     tc: getRandomTwoValues(0,1),
+      //     abs: getRandomTwoValues(0, 1),
+      //     gear: getRandomTwoValues(0, 6),
+      //     rpm: getRandomTwoValues(0, 9250)
+      //   };
+      //   let clonedArr = [...oldArray];
+      //   if (clonedArr.length > 200) {
+      //     clonedArr.shift();
+      //   }
+      //   return [...clonedArr, telemetryData];
+      // });
+
     } else {
       console.log('data is not available');
     }

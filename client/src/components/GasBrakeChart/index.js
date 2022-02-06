@@ -17,6 +17,7 @@ const brakeAccessor = {
   xAccessor: (d) => d.time,
 };
 
+
 const GasBrakeChart = ({data}) => {
   return (
     <>
@@ -36,7 +37,6 @@ const GasBrakeChart = ({data}) => {
         />
         <Axis
           orientation="left"
-          tickValues={[0, 0.25, 0.5, 0.75, 1]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -47,7 +47,6 @@ const GasBrakeChart = ({data}) => {
         ></Axis>
         <Axis
           orientation="right"
-          tickValues={[0, 0.25, 0.5, 0.75, 1]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>

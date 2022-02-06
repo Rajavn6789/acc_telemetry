@@ -36,6 +36,8 @@ const ChartBackground = () => {
   );
 };
 
+const tickValues = [0, 1];
+
 const ABSTCChart = ({ data }) => {
   return (
     <>
@@ -48,14 +50,14 @@ const ABSTCChart = ({ data }) => {
         <Grid
           rows={true}
           columns={false}
-          numTicks={10}
+          numTicks={1}
           strokeWidth={1}
           strokeOpacity={0.1}
           strokeDasharray="5,2"
         />
         <Axis
           orientation="left"
-          tickValues={[0, 1]}
+          tickValues={tickValues}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -66,7 +68,7 @@ const ABSTCChart = ({ data }) => {
         ></Axis>
         <Axis
           orientation="right"
-          tickValues={[0, 1]}
+          tickValues={tickValues}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>

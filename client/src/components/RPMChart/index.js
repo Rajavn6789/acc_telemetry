@@ -25,7 +25,6 @@ const RPMChart = ({ data }) => {
         />
         <Axis
           orientation="left"
-          tickValues={[0, 2500, 5000, 7500, 10000]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
@@ -36,7 +35,6 @@ const RPMChart = ({ data }) => {
         ></Axis>
         <Axis
           orientation="right"
-          tickValues={[0, 2500, 5000, 7500, 10000]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={'white'} opacity={0.5}>
