@@ -36,7 +36,6 @@ const SpeedChart = ({ data }) => {
         ></Axis>
         <Axis
           orientation="right"
-          hideTicks
           tickValues={[0, 50, 100, 150, 200, 250, 300]}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
