@@ -3,6 +3,8 @@ import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import GasBrakeChart from './components/GasBrakeChart';
 import SpeedChart from './components/SpeedChart';
 import ABSTCChart from './components/ABSTCChart';
+import RPMChart from './components/RPMChart';
+import GEARChart from "./components/GEARChart";
 import { useInterval } from './utils/hooks';
 import { getRandomValue, getRandomTwoValues } from './utils/functions';
 import './App.css';
@@ -61,6 +63,8 @@ function App() {
           time: Date.now(),
           tc: getRandomTwoValues(0,1),
           abs: getRandomTwoValues(0, 1),
+          gear: getRandomTwoValues(0, 6),
+          rpm: getRandomTwoValues(0, 9250)
         };
         let clonedArr = [...oldArray];
         if (clonedArr.length > 200) {
@@ -78,6 +82,8 @@ function App() {
       <GasBrakeChart data={data} />
       <SpeedChart data={data} />
       <ABSTCChart data={data} />
+      <RPMChart data={data} />
+      <GEARChart data={data} />
     </div>
   );
 }
