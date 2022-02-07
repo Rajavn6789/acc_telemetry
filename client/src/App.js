@@ -17,11 +17,13 @@ const randomDate = (start, end) => {
   );
 };
 
+const maxItems = 250;
+
 function App() {
   const [data, setData] = useState(false);
 
   useEffect(() => {
-    const filledArray = [...new Array(100)].map(() => {
+    const filledArray = [...new Array(maxItems)].map(() => {
       return {
         gas: 0,
         brake: 0,
@@ -50,7 +52,7 @@ function App() {
         const telemetryData = JSON.parse(message.data);
         setData((oldArray) => {
           let clonedArr = [...oldArray];
-          if (clonedArr.length > 200) {
+          if (clonedArr.length > maxItems) {
             clonedArr.shift();
           }
           return [...clonedArr, telemetryData];
@@ -69,7 +71,7 @@ function App() {
       //     rpm: getRandomTwoValues(0, 9250)
       //   };
       //   let clonedArr = [...oldArray];
-      //   if (clonedArr.length > 200) {
+      //   if (clonedArr.length > maxItems) {
       //     clonedArr.shift();
       //   }
       //   return [...clonedArr, telemetryData];
