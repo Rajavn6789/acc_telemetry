@@ -84,7 +84,7 @@ const ReadPhysics = () => {
   const cgHeight = reader.ReadFloat();
 
   result.carDamage = [];
-  for (let i = 0; i < 5; i++) result.carDamage.push(reader.ReadFloat());
+  for (let i = 0; i < 5; i++) result.carDamage.push(Math.round(reader.ReadFloat()));
 
   const numberOfTyresOut = reader.ReadUInt32();
   result.pitLimiterOn = reader.ReadUInt32() > 0;
@@ -393,6 +393,7 @@ const connect = () => {
         rpm: physicsResult.rpm,
         steerAngle: Math.round(400 * physicsResult.steerAngle),  // Convert range to dynamic
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
+        carDamage: physicsResult.carDamage
       };
       const resultString = JSON.stringify(result);
       ws.send(resultString);

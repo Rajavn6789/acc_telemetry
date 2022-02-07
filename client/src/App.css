@@ -37,13 +37,28 @@
   }
 }
 
-.logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.2);
+.logo-container {
+  min-height: 65px;
+  background: #292c30;
+  color: white;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+.sub {
+  font-size: 10px;
+  margin-left: 8px;
+  margin-top: 8px;
+}
+
+.damage-indicator {
+  display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
+    margin: 16px 0;
 }
