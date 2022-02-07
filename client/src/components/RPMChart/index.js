@@ -1,9 +1,15 @@
-import React from 'react';
-import { LineSeries, Axis, XYChart, Grid } from '@visx/xychart';
+import React from "react";
+import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
+import ChartLegend from "../ChartLegend";
 
 const speedAccessor = {
   yAccessor: (d) => d.rpm,
   xAccessor: (d) => d.time,
+};
+
+const ordinalScaleObj = {
+  domain: ["rpm"],
+  range: ["green"],
 };
 
 const RPMChart = ({ data }) => {
@@ -11,10 +17,10 @@ const RPMChart = ({ data }) => {
     <>
       <XYChart
         height={250}
-        xScale={{ type: 'band' }}
-        yScale={{ type: 'linear', domain: [0, 10000] }}
+        xScale={{ type: "band" }}
+        yScale={{ type: "linear", domain: [0, 10000] }}
       >
-        <rect x={0} y={0} width={'100%'} height={300} fill={'black'} />
+        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
         <Grid
           rows={true}
           columns={false}
@@ -27,8 +33,8 @@ const RPMChart = ({ data }) => {
           orientation="left"
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
-              <text {...tickProps} fill={'white'} opacity={0.5}>
-                {formattedValue}
+              <text {...tickProps} fill={"white"} opacity={0.5}>
+                {`${parseInt(formattedValue)}k`}
               </text>
             </g>
           )}
@@ -37,8 +43,8 @@ const RPMChart = ({ data }) => {
           orientation="right"
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
-              <text {...tickProps} fill={'white'} opacity={0.5}>
-                {formattedValue}
+              <text {...tickProps} fill={"white"} opacity={0.5}>
+                {`${parseInt(formattedValue)}k`}
               </text>
             </g>
           )}
@@ -51,6 +57,7 @@ const RPMChart = ({ data }) => {
           {...speedAccessor}
         />
       </XYChart>
+      <ChartLegend scale={ordinalScaleObj} />
     </>
   );
 };

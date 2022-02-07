@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  LineSeries,
-  Axis,
-  XYChart,
-  Grid,
-} from '@visx/xychart';
-
+import React from "react";
+import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
+import ChartLegend from "../ChartLegend";
 
 const gasAccessor = {
   yAccessor: (d) => d.gas,
@@ -17,16 +12,20 @@ const brakeAccessor = {
   xAccessor: (d) => d.time,
 };
 
+const ordinalScaleObj = {
+  domain: ["Throttle", "Brake"],
+  range: ["green", "red"],
+};
 
-const GasBrakeChart = ({data}) => {
+const GasBrakeChart = ({ data }) => {
   return (
     <>
       <XYChart
         height={250}
-        xScale={{ type: 'band' }}
-        yScale={{ type: 'linear', domain: [0, 1] }}
+        xScale={{ type: "band" }}
+        yScale={{ type: "linear", domain: [0, 1] }}
       >
-        <rect x={0} y={0} width={'100%'} height={300} fill={'black'} />
+        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
         <Grid
           rows={true}
           columns={false}
@@ -39,7 +38,7 @@ const GasBrakeChart = ({data}) => {
           orientation="left"
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
-              <text {...tickProps} fill={'white'} opacity={0.5}>
+              <text {...tickProps} fill={"white"} opacity={0.5}>
                 {formattedValue * 100}
               </text>
             </g>
@@ -49,20 +48,21 @@ const GasBrakeChart = ({data}) => {
           orientation="right"
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
-              <text {...tickProps} fill={'white'} opacity={0.5}>
+              <text {...tickProps} fill={"white"} opacity={0.5}>
                 {formattedValue * 100}
               </text>
             </g>
           )}
         ></Axis>
+        <LineSeries dataKey="gas" stroke="green" data={data} {...gasAccessor} />
         <LineSeries
-          dataKey="gas"
-          stroke="green"
+          dataKey="brake"
+          stroke="red"
           data={data}
-          {...gasAccessor}
+          {...brakeAccessor}
         />
-        <LineSeries dataKey="brake" stroke="red" data={data} {...brakeAccessor} />
       </XYChart>
+      <ChartLegend scale={ordinalScaleObj} />
     </>
   );
 };

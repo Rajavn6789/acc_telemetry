@@ -7,6 +7,8 @@ import SpeedChart from './components/SpeedChart';
 import ABSTCChart from './components/ABSTCChart';
 import RPMChart from './components/RPMChart';
 import GEARChart from './components/GEARChart';
+import FFBChart from "./components/FFBChart";
+import SteerAngleChart from "./components/SteerAngleChart";
 import { useInterval } from './utils/hooks';
 import { getRandomValue, getRandomTwoValues } from './utils/functions';
 import './App.css';
@@ -46,6 +48,8 @@ function App() {
         abs: 0,
         gear: 0,
         rpm: 0,
+        steerAngle: 0,
+        ffb: 0,
       };
     });
     setData(filledArray);
@@ -72,23 +76,25 @@ function App() {
         });
       };
 
-      setData((oldArray) => {
-        const telemetryData = {
-          gas: getRandomValue(0, 1),
-          brake: getRandomValue(0, 1),
-          speed: getRandomValue(0, 250),
-          time: Date.now(),
-          tc: getRandomTwoValues(0,1),
-          abs: getRandomTwoValues(0, 1),
-          gear: getRandomTwoValues(0, 6),
-          rpm: getRandomTwoValues(0, 9250)
-        };
-        let clonedArr = [...oldArray];
-        if (clonedArr.length > maxItems) {
-          clonedArr.shift();
-        }
-        return [...clonedArr, telemetryData];
-      });
+      // setData((oldArray) => {
+      //   const telemetryData = {
+      //     gas: getRandomValue(0, 1),
+      //     brake: getRandomValue(0, 1),
+      //     speed: getRandomValue(0, 250),
+      //     time: Date.now(),
+      //     tc: getRandomTwoValues(0,1),
+      //     abs: getRandomTwoValues(0, 1),
+      //     gear: getRandomTwoValues(0, 6),
+      //     rpm: getRandomTwoValues(0, 9250),
+      //     steerAngle: getRandomValue(-400, 400),
+      //     ffb: getRandomValue(0, 120),
+      //   };
+      //   let clonedArr = [...oldArray];
+      //   if (clonedArr.length > maxItems) {
+      //     clonedArr.shift();
+      //   }
+      //   return [...clonedArr, telemetryData];
+      // });
     } else {
       console.log('data is not available');
     }
@@ -130,6 +136,8 @@ function App() {
         <Layout style={{ marginLeft: 200 }}>
           <Content>
             <div>
+              <FFBChart data={data} />
+              <SteerAngleChart data={data} />
               <GasBrakeChart data={data} />
               <SpeedChart data={data} />
               <RPMChart data={data} />
@@ -138,7 +146,7 @@ function App() {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center', padding: '12px 25px' }}>
-            ©2022 Designed and Developed by Raja (This is only for realtime purposes, no data is saved for post analysis)
+            ©2022 Designed and Developed by Raja (Data you see is realtime, no data is saved for post analysis)
           </Footer>
         </Layout>
       </Layout>
