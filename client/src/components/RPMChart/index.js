@@ -10,7 +10,7 @@ const RPMChart = ({ data }) => {
   return (
     <>
       <XYChart
-        height={300}
+        height={250}
         xScale={{ type: 'band' }}
         yScale={{ type: 'linear', domain: [0, 10000] }}
       >

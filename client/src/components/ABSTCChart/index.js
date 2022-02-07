@@ -42,7 +42,7 @@ const ABSTCChart = ({ data }) => {
   return (
     <>
       <XYChart
-        height={200}
+        height={150}
         xScale={{ type: 'band' }}
         yScale={{ type: 'linear', domain: [0, 1] }}
       >
