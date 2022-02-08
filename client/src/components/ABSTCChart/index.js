@@ -4,12 +4,12 @@ import ChartLegend from "../ChartLegend";
 
 const absAccessor = {
   yAccessor: (d) => d.abs,
-  xAccessor: (d) => d.time,
+  xAccessor: (d) => d.distance,
 };
 
 const tcAccessor = {
   yAccessor: (d) => d.tc,
-  xAccessor: (d) => d.time,
+  xAccessor: (d) => d.distance,
 };
 
 const ordinalScaleObj = {

@@ -4,7 +4,7 @@ import ChartLegend from "../ChartLegend";
 
 const steerAngleAccessor = {
   yAccessor: (d) => d.steerAngle,
-  xAccessor: (d) => d.time,
+  xAccessor: (d) => d.distance,
 };
 
 const tickValues = [-400, -200, 0, 200, 400];

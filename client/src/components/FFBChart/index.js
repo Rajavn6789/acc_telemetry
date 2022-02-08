@@ -4,7 +4,7 @@ import ChartLegend from "../ChartLegend"
 
 const ffbAccessor = {
   yAccessor: (d) => d.ffb,
-  xAccessor: (d) => d.time,
+  xAccessor: (d) => d.distance,
 };
 
 const tickValues = [0, 50, 100, 150, 200, 250, 300];

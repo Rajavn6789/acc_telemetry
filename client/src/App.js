@@ -26,24 +26,18 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const randomDate = (start, end) => {
-  return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
-  );
-};
-
 const maxItems = 250;
 
 function App() {
   const [data, setData] = useState(false);
 
   const loadDefaultValues = () => {
-    const defaultArray = [...new Array(maxItems)].map(() => {
+    const defaultArray = [...new Array(maxItems)].map((element, index) => {
       return {
         gas: 0,
         brake: 0,
         speed: 0,
-        time: randomDate(new Date(2012, 0, 1), new Date()),
+        distance: index * 100,
         tc: 0,
         abs: 0,
         gear: 0,

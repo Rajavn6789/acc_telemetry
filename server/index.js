@@ -57,14 +57,11 @@ app.listen(8080, () => {
 
 
 /* Web Sockets - for frequently changing data */
-const connect = () => {
+const startWSSServer = () => {
   
- 
   const wss = new WebSocket.Server({ port: 8081 }, () =>
     console.log("Socker started at port: 8081")
   );
-
-
 
   wss.on("connection", function connection(ws, request, client) {
 
@@ -87,23 +84,25 @@ const connect = () => {
         gas: physicsResult.gas,
         brake: physicsResult.brake,
         speed: Math.round(physicsResult.speedKmh),
-        time: graphicsResult.iCurrentTime * 1000,
         tc: physicsResult.tc,
         abs: physicsResult.abs,
         gear: physicsResult.gear,
         rpm: physicsResult.rpm,
         steerAngle: Math.round(400 * physicsResult.steerAngle),  // Convert range to dynamic
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
-        carDamage: physicsResult.carDamage
+        carDamage: physicsResult.carDamage,
+        time: graphicsResult.iCurrentTime * 1000,
+        //status: graphicsResult.status, // Not working
+        distance: Math.round(graphicsResult.distanceTraveled)
       };
       const resultString = JSON.stringify(result);
       ws.send(resultString);
     }, 1000 / 30);
 
-    // ws.on("error", function message(data) {
-    //   console.error('Socket encountered error: ', err.message, 'Closing socket');
-    //   ws.close();
-    // });
+    ws.on("error", function message(data) {
+      console.error('Socket encountered error');
+      ws.close();
+    });
   });
 };
 
@@ -111,7 +110,8 @@ connectDebug = () => {
   setInterval(() => {
     const physicsResult = ReadPhysics(m_physics);
     const graphicsResult = ReadGraphics(m_graphics);
+    console.log('graphicsResult', Math.round(graphicsResult.distanceTraveled));
   }, 100);
 };
-
-connect();
+//connectDebug();
+startWSSServer();

@@ -4,7 +4,7 @@ import ChartLegend from "../ChartLegend";
 
 const speedAccessor = {
   yAccessor: (d) => d.gear,
-  xAccessor: (d) => d.time,
+  xAccessor: (d) => d.distance,
 };
 
 const tickValues = [0, 1, 2, 3, 4, 5, 6];
