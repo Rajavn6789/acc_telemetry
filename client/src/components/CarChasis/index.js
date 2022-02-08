@@ -1,8 +1,6 @@
 import React, { memo } from "react";
 
 const CarChasis = ({ carDamage }) => {
-
-
   const [front, rear, left, right, center] = carDamage;
 
   const dynamicColor = (damage) => {
@@ -47,16 +45,26 @@ const CarChasis = ({ carDamage }) => {
           fill="black3"
           d="m176.02,167.52999c-0.2,-1.72 -1.04,-3.6 -2.1,-4.76c-0.3,-0.33 -0.9,-0.82 -1.32,-1.08c-1.43,-0.9 -1.32,-0.89 -9.38,-0.74c-7.1,0.13 -7.16,0.13 -7.8,0.41c-1.54,0.69 -2.86,2.14 -3.55,3.89c-0.58,1.49 -0.67,2.18 -0.63,5.1l0.04,2.5l-1.57,0.02l-1.57,0.02l0.06,3.96l0.06,3.96l1.57,-0.02l1.57,-0.02l0.03,1.92l0.03,1.92l-1.57,0.02l-1.57,0.02l0.06,3.96l0.06,3.96l1.57,-0.02l1.57,-0.02l0.04,2.51c0.04,2.77 0.16,3.56 0.66,4.76c0.94,2.24 2.53,3.78 4.4,4.25c0.6,0.14 1.77,0.15 7.84,0.05c7.05,-0.13 7.13,-0.13 7.76,-0.41c2.35,-1.05 3.95,-3.59 4.21,-6.67c0.11,-1.28 -0.32,-28.27 -0.47,-29.49z"
         ></path>
-        <path
-          id="body__front"
-          fill={dynamicColor(front)}
-          d="m178.46,36.90999l-98.11,0c0,0 -3.59,-9.89 0,-14.08s95.54,-3.85 98.11,0c1.71,2.94 0,14.08 0,14.08z"
-        ></path>
-        <path
-          id="body__rear"
-          fill={dynamicColor(rear)}
-          d="m79.52,207.28999l98.11,0c0,0 3.59,9.89 0,14.08c-3.59,4.19 -95.54,3.85 -98.11,0c-1.71,-2.94 0,-14.08 0,-14.08z"
-        ></path>
+        <g>
+          <path
+            id="body__front"
+            fill={dynamicColor(front)}
+            d="m178.46,36.90999l-98.11,0c0,0 -3.59,-9.89 0,-14.08s95.54,-3.85 98.11,0c1.71,2.94 0,14.08 0,14.08z"
+          ></path>
+          <text x="50%" y="33" fill="white" fontSize={10}>
+            {front}
+          </text>
+        </g>
+        <g>
+          <path
+            id="body__rear"
+            fill={dynamicColor(rear)}
+            d="m79.52,207.28999l98.11,0c0,0 3.59,9.89 0,14.08c-3.59,4.19 -95.54,3.85 -98.11,0c-1.71,-2.94 0,-14.08 0,-14.08z"
+          ></path>
+          <text x="50%" y="220" fill="white" fontSize={10}>
+            {rear}
+          </text>
+        </g>
         <rect
           id="chasis__center"
           fill={"black"}
@@ -75,15 +83,20 @@ const CarChasis = ({ carDamage }) => {
           y="9577.28639"
           x="1247.09834"
         ></rect>
-        <rect
-          id="body__left"
-          fill={dynamicColor(left)}
-          transform="matrix(1.01931 0 0 -0.909149 -1450.79 8283.83)"
-          height="68.7"
-          width="27"
-          y="8944.45422"
-          x="1504.2976"
-        ></rect>
+        <g>
+          <rect
+            id="body__left"
+            fill={dynamicColor(left)}
+            transform="matrix(1.01931 0 0 -0.909149 -1450.79 8283.83)"
+            height="68.7"
+            width="27"
+            y="8944.45422"
+            x="1504.2976"
+          ></rect>
+          <text x="93" y="50%" fill="white" fontSize={10}>
+            {left}
+          </text>
+        </g>
         <rect
           id="chasis__back"
           fill="black"
@@ -93,15 +106,20 @@ const CarChasis = ({ carDamage }) => {
           y="9469.90674"
           x="1247.3504"
         ></rect>
-        <rect
-          id="body__right"
-          fill={dynamicColor(right)}
-          transform="matrix(1.01931 0 0 -0.909149 -1450.79 8283.83)"
-          height="68.7"
-          width="27"
-          y="8944.61597"
-          x="1569.36469"
-        ></rect>
+        <g>
+          <rect
+            id="body__right"
+            fill={dynamicColor(right)}
+            transform="matrix(1.01931 0 0 -0.909149 -1450.79 8283.83)"
+            height="68.7"
+            width="27"
+            y="8944.61597"
+            x="1569.36469"
+          ></rect>
+          <text x="160" y="50%" fill="white" fontSize={10}>
+            {right}
+          </text>
+        </g>
       </g>
     </svg>
   );

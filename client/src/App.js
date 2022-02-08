@@ -26,66 +26,98 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const maxItems = 250;
+const maxItems = 200;
+
+const loadDefaultValues = () => {
+  const defaultArray = [...new Array(maxItems)].map((element, index) => {
+    return {
+      gas: 0,
+      brake: 0,
+      speed: 0,
+      distance: index,
+      tc: 0,
+      abs: 0,
+      gear: 0,
+      rpm: 0,
+      steerAngle: 0,
+      ffb: 0,
+      carDamage: [
+        0, // front
+        0, //rear
+        0, //left
+        0, // right
+        0, // center
+      ],
+    };
+  });
+  return defaultArray;
+};
 
 function App() {
   const [data, setData] = useState(false);
+  const [connStatus, setConnStatus] = useState("offline");
 
-  const loadDefaultValues = () => {
-    const defaultArray = [...new Array(maxItems)].map((element, index) => {
-      return {
-        gas: 0,
-        brake: 0,
-        speed: 0,
-        distance: index * 100,
-        tc: 0,
-        abs: 0,
-        gear: 0,
-        rpm: 0,
-        steerAngle: 0,
-        ffb: 0,
-        carDamage: [
-          0, // front
-          0, //rear
-          0, //left
-          0, // right
-          0, // center
-        ],
-      };
-    });
-    return defaultArray;
-  };
+  const client = new W3CWebSocket("ws://127.0.0.1:8081");
 
   useEffect(() => {
     const defaultArray = loadDefaultValues();
     setData(defaultArray);
   }, []);
 
-  useEffect(() => {
-    const client = new W3CWebSocket("ws://127.0.0.1:8081");
-
+  const websocketConnection = () => {
     client.onopen = () => {
       console.log("Server Connected");
+      setConnStatus("online");
     };
 
     client.onclose = () => {
       console.log("Server Disconnected");
       const defaultArray = loadDefaultValues();
       setData(defaultArray);
+      setConnStatus("offline");
     };
 
     client.onmessage = (message) => {
       const telemetryData = JSON.parse(message.data);
-      setData((oldArray) => {
-        let clonedArr = [...oldArray];
-        if (clonedArr.length > maxItems) {
-          clonedArr.shift();
-        }
-        return [...clonedArr, telemetryData];
-      });
+      if (telemetryData.gear >= 0) {
+        setData((oldArray) => {
+          let clonedArr = [...oldArray];
+          if (clonedArr.length > maxItems) {
+            clonedArr.shift();
+          }
+          return [...clonedArr, telemetryData];
+        });
+      } else {
+      }
     };
+  };
+
+  useEffect(() => {
+    websocketConnection();
+    return () => {
+      client.close()
+    }
   }, []);
 
+  const handleConnect = () => {
+    // if (connStatus === "offline") {
+    //   setConnStatus("online");
+    //   websocketConnection();
+    // } else {
+    //   setConnStatus("offline");
+    //   client.close();
+    // }
+  };
+
+  const getRecentData = (data, key) => {
+    let finalData;
+    if (data && data.length > 1) {
+      finalData = data[data.length - 1][key];
+    } else {
+      finalData = false;
+    }
+    return finalData;
+  };
 
   // Car Damage
   let carDamage;
@@ -95,7 +127,7 @@ function App() {
     carDamage = [0, 0, 0, 0, 0];
   }
 
-
+  
   return (
     <>
       <Layout hasSider>
@@ -116,6 +148,16 @@ function App() {
             <span className="logo">ACCRAT</span>
             <span className="sub">Realtime Analytics Tool v1.0</span>
           </div>
+          <Divider>Connection</Divider>
+          <div className="user-info">
+            <Button
+              danger={connStatus === "offline"}
+              icon={<PoweroffOutlined />}
+              onClick={handleConnect}
+            >
+              {connStatus === "offline" ? "Connect" : "Disconnect"}
+            </Button>
+          </div>
           <Divider>User Info</Divider>
           <div className="user-info">
             <div>Name: Raja</div>
@@ -134,11 +176,11 @@ function App() {
             <div>rainIn10min: ACC_LIGHT_RAIN</div>
             <div>rainIn30min: ACC_MEDIUM_RAIN</div>
           </div>
-          <Divider>Damage Indicator</Divider>
+          <Divider>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: Porsche 911</div>
             <CarChasis carDamage={carDamage} />
-            <div>Time to fix: 11s</div>
+            <div>Total damage: {carDamage[4]}</div>
           </div>
           <Divider>Lap Info</Divider>
           <div className="user-info">
@@ -162,11 +204,8 @@ function App() {
               mode="horizontal"
               defaultSelectedKeys={["basic"]}
             >
-              <Menu.Item key="overview" icon={<PieChartOutlined />}>
-                Overview
-              </Menu.Item>
               <Menu.Item key="basic" icon={<PieChartOutlined />}>
-                Basic
+                Standard
               </Menu.Item>
               <Menu.Item key="wheel" icon={<DesktopOutlined />}>
                 Wheel

@@ -91,7 +91,6 @@ const startWSSServer = () => {
         steerAngle: Math.round(400 * physicsResult.steerAngle),  // Convert range to dynamic
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
-        time: graphicsResult.iCurrentTime * 1000,
         //status: graphicsResult.status, // Not working
         distance: Math.round(graphicsResult.distanceTraveled)
       };
