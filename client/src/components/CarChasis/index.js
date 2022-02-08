@@ -1,12 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 
-const CarChasis = ({ data }) => {
-  let carDamage;
-  if (data && data.length > 1) {
-    carDamage = data[data.length - 1].carDamage;
-  } else {
-    carDamage = [0, 0, 0, 0, 0];
-  }
+const CarChasis = ({ carDamage }) => {
+
+
   const [front, rear, left, right, center] = carDamage;
 
   const dynamicColor = (damage) => {
@@ -111,4 +107,4 @@ const CarChasis = ({ data }) => {
   );
 };
 
-export default CarChasis;
+export default memo(CarChasis);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Button, Divider  } from "antd";
+import { Layout, Menu, Button, Divider } from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import CarChasis from "./components/CarChasis";
@@ -26,8 +26,6 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const client = new W3CWebSocket("ws://127.0.0.1:8081");
-
 const randomDate = (start, end) => {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime())
@@ -39,8 +37,8 @@ const maxItems = 250;
 function App() {
   const [data, setData] = useState(false);
 
-  useEffect(() => {
-    const filledArray = [...new Array(maxItems)].map(() => {
+  const loadDefaultValues = () => {
+    const defaultArray = [...new Array(maxItems)].map(() => {
       return {
         gas: 0,
         brake: 0,
@@ -53,71 +51,55 @@ function App() {
         steerAngle: 0,
         ffb: 0,
         carDamage: [
-          1, // front
-          1, //rear
-          1, //left
-          1, // right
-          1 // center
-        ]
+          0, // front
+          0, //rear
+          0, //left
+          0, // right
+          0, // center
+        ],
       };
     });
-    console.log('filledArray', filledArray)
-    setData(filledArray);
+    return defaultArray;
+  };
+
+  useEffect(() => {
+    const defaultArray = loadDefaultValues();
+    setData(defaultArray);
   }, []);
 
-  useInterval(() => {
-    if (data) {
-      client.onopen = () => {
-        console.log("Server Connected");
-      };
+  useEffect(() => {
+    const client = new W3CWebSocket("ws://127.0.0.1:8081");
 
-      client.onclose = () => {
-        console.log("Server Disconnected");
-      };
+    client.onopen = () => {
+      console.log("Server Connected");
+    };
 
-      client.onmessage = (message) => {
-      //   const telemetryData = JSON.parse(message.data);
-      //   setData((oldArray) => {
-      //     let clonedArr = [...oldArray];
-      //     if (clonedArr.length > maxItems) {
-      //       clonedArr.shift();
-      //     }
-      //     return [...clonedArr, telemetryData];
-      //   });
-      };
+    client.onclose = () => {
+      console.log("Server Disconnected");
+      const defaultArray = loadDefaultValues();
+      setData(defaultArray);
+    };
 
+    client.onmessage = (message) => {
+      const telemetryData = JSON.parse(message.data);
       setData((oldArray) => {
-        const telemetryData = {
-          gas: getRandomValue(0, 1),
-          brake: getRandomValue(0, 1),
-          speed: getRandomValue(0, 250),
-          time: Date.now(),
-          tc: getRandomTwoValues(0, 1),
-          abs: getRandomTwoValues(0, 1),
-          gear: getRandomTwoValues(0, 6),
-          rpm: getRandomTwoValues(0, 9250),
-          steerAngle: getRandomValue(-200, 200),
-          ffb: getRandomValue(0, 120),
-          carDamage: [
-              535.74560546875, // front
-              21.06369400024414, //rear
-              0, //left
-              0, // right
-              0 // center
-            ]
-          }
-       
         let clonedArr = [...oldArray];
         if (clonedArr.length > maxItems) {
           clonedArr.shift();
         }
         return [...clonedArr, telemetryData];
       });
-    } else {
-      console.log("data is not available");
-    }
-  }, 1000 / 30);
+    };
+  }, []);
 
+
+  // Car Damage
+  let carDamage;
+  if (data && data.length > 1) {
+    carDamage = data[data.length - 1].carDamage;
+  } else {
+    carDamage = [0, 0, 0, 0, 0];
+  }
 
 
   return (
@@ -140,15 +122,41 @@ function App() {
             <span className="logo">ACCRAT</span>
             <span className="sub">Realtime Analytics Tool v1.0</span>
           </div>
+          <Divider>User Info</Divider>
+          <div className="user-info">
+            <div>Name: Raja</div>
+            <div>Online: Yes</div>
+          </div>
+          <Divider>ACC Info</Divider>
+          <div className="user-info">
+            <div>ACC Status: Replay</div>
+            <div>Session Type: Race</div>
+            <div>Clock: 12:00</div>
+          </div>
+          <Divider>Weather Info</Divider>
+          <div className="user-info">
+            <div>trackGripStatus: WET</div>
+            <div>rainNow: ACC_DRIZZLE</div>
+            <div>rainIn10min: ACC_LIGHT_RAIN</div>
+            <div>rainIn30min: ACC_MEDIUM_RAIN</div>
+          </div>
           <Divider>Damage Indicator</Divider>
           <div className="damage-indicator">
             <div>Car: Porsche 911</div>
-            <CarChasis data={data}  />
+            <CarChasis carDamage={carDamage} />
             <div>Time to fix: 11s</div>
           </div>
-          <Divider>Info</Divider>
-          <div>Acc Status: ACC_OFF</div>
-          <div>Acc Session Type: Practice</div>
+          <Divider>Lap Info</Divider>
+          <div className="user-info">
+            <div>Position: 1</div>
+            <div>currentSectorIndex: 1</div>
+            <div>lastSectorTime: 1</div>
+          </div>
+          <Divider>Version</Divider>
+          <div className="user-info">
+            <div>Acc: 1.8.11</div>
+            <div>Sharedmem: 1.8</div>
+          </div>
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
           <Header
@@ -189,8 +197,10 @@ function App() {
             </div>
           </Content>
           <Footer style={{ textAlign: "center", padding: "12px 25px" }}>
-            ©2022 Designed and Developed by Raja (Data you see is realtime, no
-            data is saved for post analysis)
+            <div>
+              ©2022 Designed and Developed by Raja (Data you see is realtime, no
+              data is saved for post analysis)
+            </div>
           </Footer>
         </Layout>
       </Layout>

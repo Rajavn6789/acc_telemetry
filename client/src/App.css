@@ -55,7 +55,7 @@
   margin-top: 8px;
 }
 
-.damage-indicator {
+.damage-indicator, .user-info {
   display: flex;
     flex-direction: column;
     align-items: center;
