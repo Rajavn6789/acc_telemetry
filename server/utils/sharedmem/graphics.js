@@ -149,7 +149,7 @@ const ReadGraphics = (m_graphics) => {
     ];
     result.currentTyreSet = reader.ReadUInt32();
     result.strategyTyreSet = reader.ReadUInt32();
-  
+
     return result;
   };
 
