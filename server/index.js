@@ -71,6 +71,9 @@ const startWSSServer = () => {
 
     ws.on("close", function close() {
       console.log("disconnected");
+      m_physics.closeMapping();
+      m_graphics.closeMapping();
+      m_static.closeMapping();
     });
 
     ws.on("message", function message(data) {
@@ -88,10 +91,9 @@ const startWSSServer = () => {
         abs: physicsResult.abs,
         gear: physicsResult.gear,
         rpm: physicsResult.rpm,
-        steerAngle: Math.round(400 * physicsResult.steerAngle),  // Convert range to dynamic
+        steerAngle: Math.round(400 * physicsResult.steerAngle), 
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
-        //status: graphicsResult.status, // Not working
         distance: Math.round(graphicsResult.distanceTraveled)
       };
       const resultString = JSON.stringify(result);
