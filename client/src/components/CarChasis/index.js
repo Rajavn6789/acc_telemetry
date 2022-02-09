@@ -3,13 +3,17 @@ import React, { memo } from "react";
 const CarChasis = ({ carDamage }) => {
   const [front, rear, left, right, center] = carDamage;
 
+  const low = 1;
+  const medium = 20;
+  const hard = 75;
+
   const dynamicColor = (damage) => {
     let color;
-    if (damage > 100) {
+    if (damage >= hard) {
       color = "red";
-    } else if (damage > 50 && damage <= 100) {
+    } else if (damage > medium && damage < hard) {
       color = "orange";
-    } else if (damage > 1 && damage <= 50) {
+    } else if (damage > low && damage <= medium) {
       color = "#8ddb00";
     } else {
       color = "black";
