@@ -4,12 +4,12 @@ import ChartLegend from "../ChartLegend";
 
 const gasAccessor = {
   yAccessor: (d) => d.gas,
-  xAccessor: (d) => d.distance,
+  xAccessor: (d) => d.time,
 };
 
 const brakeAccessor = {
   yAccessor: (d) => d.brake,
-  xAccessor: (d) => d.distance,
+  xAccessor: (d) => d.time,
 };
 
 const ordinalScaleObj = {

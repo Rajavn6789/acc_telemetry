@@ -10,7 +10,7 @@ const CarChasis = ({ carDamage }) => {
     } else if (damage > 50 && damage <= 100) {
       color = "orange";
     } else if (damage > 1 && damage <= 50) {
-      color = "yellow";
+      color = "#8ddb00";
     } else {
       color = "black";
     }

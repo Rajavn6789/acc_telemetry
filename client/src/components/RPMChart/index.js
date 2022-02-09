@@ -4,7 +4,7 @@ import ChartLegend from "../ChartLegend";
 
 const speedAccessor = {
   yAccessor: (d) => d.rpm,
-  xAccessor: (d) => d.distance,
+  xAccessor: (d) => d.time,
 };
 
 const ordinalScaleObj = {

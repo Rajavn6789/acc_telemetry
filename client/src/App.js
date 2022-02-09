@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Layout, Menu, Button, Divider } from "antd";
-import { PoweroffOutlined } from "@ant-design/icons";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import CarChasis from "./components/CarChasis";
 import GasBrakeChart from "./components/GasBrakeChart";
 import SpeedChart from "./components/SpeedChart";
@@ -10,7 +8,6 @@ import RPMChart from "./components/RPMChart";
 import GEARChart from "./components/GEARChart";
 import FFBChart from "./components/FFBChart";
 import SteerAngleChart from "./components/SteerAngleChart";
-import { useInterval } from "./utils/hooks";
 import { getRandomValue, getRandomTwoValues } from "./utils/functions";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
@@ -18,15 +15,14 @@ import "./App.css";
 import {
   DesktopOutlined,
   PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
+  CheckCircleTwoTone,
+  CloseCircleTwoTone,
 } from "@ant-design/icons";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const maxItems = 200;
+const maxItems = 300;
 
 const loadDefaultValues = () => {
   const defaultArray = [...new Array(maxItems)].map((element, index) => {
@@ -34,7 +30,7 @@ const loadDefaultValues = () => {
       gas: 0,
       brake: 0,
       speed: 0,
-      distance: index,
+      time: index ,
       tc: 0,
       abs: 0,
       gear: 0,
@@ -56,30 +52,29 @@ const loadDefaultValues = () => {
 function App() {
   const [data, setData] = useState(false);
   const [connStatus, setConnStatus] = useState("offline");
+  const [accStatus, setAccStatus] = useState("offline");
 
-  const client = new W3CWebSocket("ws://127.0.0.1:8081");
+  const webSocket = useRef(null);
 
   useEffect(() => {
-    const defaultArray = loadDefaultValues();
-    setData(defaultArray);
-  }, []);
+    setData(loadDefaultValues());
 
-  const websocketConnection = () => {
-    client.onopen = () => {
-      console.log("Server Connected");
+    webSocket.current = new WebSocket("ws://127.0.0.1:8081");
+
+    webSocket.current.onopen = () => {
       setConnStatus("online");
     };
 
-    client.onclose = () => {
-      console.log("Server Disconnected");
-      const defaultArray = loadDefaultValues();
-      setData(defaultArray);
+    webSocket.current.onclose = () => {
+      setData(loadDefaultValues());
       setConnStatus("offline");
     };
 
-    client.onmessage = (message) => {
+    webSocket.current.onmessage = (message) => {
       const telemetryData = JSON.parse(message.data);
+      console.log('telemetryData', telemetryData)
       if (telemetryData.gear >= 0) {
+        setAccStatus("online")
         setData((oldArray) => {
           let clonedArr = [...oldArray];
           if (clonedArr.length > maxItems) {
@@ -88,36 +83,13 @@ function App() {
           return [...clonedArr, telemetryData];
         });
       } else {
+        setAccStatus("offline");
+        setData(loadDefaultValues());
       }
     };
-  };
 
-  useEffect(() => {
-    websocketConnection();
-    return () => {
-      client.close()
-    }
+    return () => webSocket.current.close();
   }, []);
-
-  const handleConnect = () => {
-    // if (connStatus === "offline") {
-    //   setConnStatus("online");
-    //   websocketConnection();
-    // } else {
-    //   setConnStatus("offline");
-    //   client.close();
-    // }
-  };
-
-  const getRecentData = (data, key) => {
-    let finalData;
-    if (data && data.length > 1) {
-      finalData = data[data.length - 1][key];
-    } else {
-      finalData = false;
-    }
-    return finalData;
-  };
 
   // Car Damage
   let carDamage;
@@ -127,7 +99,8 @@ function App() {
     carDamage = [0, 0, 0, 0, 0];
   }
 
-  
+  console.log(" data[data.length - 1][key]", data.length);
+
   return (
     <>
       <Layout hasSider>
@@ -150,13 +123,18 @@ function App() {
           </div>
           <Divider>Connection</Divider>
           <div className="user-info">
-            <Button
-              danger={connStatus === "offline"}
-              icon={<PoweroffOutlined />}
-              onClick={handleConnect}
-            >
-              {connStatus === "offline" ? "Connect" : "Disconnect"}
-            </Button>
+            Server Status:{" "}
+            {connStatus === "online" ? (
+              <CheckCircleTwoTone twoToneColor="#52c41a" />
+            ) : (
+              <CloseCircleTwoTone twoToneColor="red" />
+            )}
+            ACC Status:{" "}
+            {accStatus === "online" ? (
+              <CheckCircleTwoTone twoToneColor="#52c41a" />
+            ) : (
+              <CloseCircleTwoTone twoToneColor="red" />
+            )}
           </div>
           <Divider>User Info</Divider>
           <div className="user-info">
