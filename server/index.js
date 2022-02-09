@@ -74,6 +74,7 @@ const startWSSServer = () => {
       m_physics.closeMapping();
       m_graphics.closeMapping();
       m_static.closeMapping();
+      ws.close();
     });
 
     ws.on("message", function message(data) {
@@ -83,6 +84,19 @@ const startWSSServer = () => {
     setInterval(() => {
       const physicsResult = ReadPhysics(m_physics);
       const graphicsResult = ReadGraphics(m_graphics);
+      const static = ReadStatic(m_static);
+
+
+      const staticResult = {
+        smVersion: static.smVersion.join(""),
+        acVersion: static.acVersion.join(""),
+        carModel: static.carModel.join(""),
+        track: static.track.join(""),
+        playerName: static.playerName.join(""),
+        playerSurname: static.playerSurname.join(""),
+        playerNick: static.playerNick.join(""),
+      };
+
       const result = {
         gas: physicsResult.gas,
         brake: physicsResult.brake,
@@ -91,11 +105,19 @@ const startWSSServer = () => {
         abs: physicsResult.abs,
         gear: physicsResult.gear,
         rpm: physicsResult.rpm,
-        steerAngle: Math.round(400 * physicsResult.steerAngle), 
+        airTemp: Math.floor(physicsResult.airTemp),
+        roadTemp: Math.floor(physicsResult.roadTemp),
+        steerAngle: Math.round(400 * physicsResult.steerAngle), //Make it dynamic for all cars
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
-        distance: Math.round(graphicsResult.distanceTraveled)
+        time: graphicsResult.iCurrentTime/ 100,
+        trackGripStatus: graphicsResult.trackGripStatus,
+        rainIntensity: graphicsResult.rainIntensity,
+        rainIntensityIn10min: graphicsResult.rainIntensityIn10min,
+        rainIntensityIn30min: graphicsResult.rainIntensityIn30min,
+        ...staticResult
       };
+
       const resultString = JSON.stringify(result);
       ws.send(resultString);
     }, 1000 / 30);
@@ -111,8 +133,15 @@ connectDebug = () => {
   setInterval(() => {
     const physicsResult = ReadPhysics(m_physics);
     const graphicsResult = ReadGraphics(m_graphics);
-    console.log('graphicsResult', Math.round(graphicsResult.distanceTraveled));
-  }, 100);
+    const staticResult = ReadStatic(m_static);
+    console.log('staticResult', graphicsResult.activeCars);
+  }, 1000);
 };
-//connectDebug();
-startWSSServer();
+const debug = false;
+if(debug){
+  connectDebug();
+} else {
+  startWSSServer();
+}
+
+

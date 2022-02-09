@@ -37,6 +37,8 @@ const loadDefaultValues = () => {
       rpm: 0,
       steerAngle: 0,
       ffb: 0,
+      airTemp:0,
+      roadTemp: 0,
       carDamage: [
         0, // front
         0, //rear
@@ -44,6 +46,15 @@ const loadDefaultValues = () => {
         0, // right
         0, // center
       ],
+      trackGripStatus: "na",
+      rainIntensity: "na",
+      rainIntensityIn10min: "na",
+      rainIntensityIn30min: "na",
+      playerNick: "-",
+      track: "-",
+      carModel: "-",
+      smVersion: "-",
+      acVersion: "-"
     };
   });
   return defaultArray;
@@ -72,7 +83,7 @@ function App() {
 
     webSocket.current.onmessage = (message) => {
       const telemetryData = JSON.parse(message.data);
-      console.log('telemetryData', telemetryData)
+      // TODO: Update static values once session is on, even without telemetry
       if (telemetryData.gear >= 0) {
         setAccStatus("online")
         setData((oldArray) => {
@@ -99,7 +110,16 @@ function App() {
     carDamage = [0, 0, 0, 0, 0];
   }
 
-  console.log(" data[data.length - 1][key]", data.length);
+  const getRecentData = (data, key, defaultVal = 0) => {
+    let output;
+    if(data && data.length > 0){
+      output = data[data.length - 1][key]
+    } else {
+      output = defaultVal;
+    }
+    return output;
+  }
+
 
   return (
     <>
@@ -138,7 +158,7 @@ function App() {
           </div>
           <Divider>User Info</Divider>
           <div className="user-info">
-            <div>Name: Raja</div>
+            <div>Name: {getRecentData(data, 'playerNick')}</div>
             <div>Online: Yes</div>
           </div>
           <Divider>ACC Info</Divider>
@@ -149,14 +169,16 @@ function App() {
           </div>
           <Divider>Weather Info</Divider>
           <div className="user-info">
-            <div>trackGripStatus: WET</div>
-            <div>rainNow: ACC_DRIZZLE</div>
-            <div>rainIn10min: ACC_LIGHT_RAIN</div>
-            <div>rainIn30min: ACC_MEDIUM_RAIN</div>
+          <div>Air Temp: {getRecentData(data, 'airTemp')}&deg;C</div>
+          <div>Road Temp: {getRecentData(data, 'roadTemp')}&deg;C</div>
+            <div>trackGripStatus: {getRecentData(data, 'trackGripStatus', 'na')}</div>
+            <div>rain: {getRecentData(data, 'rainIntensity','na')}</div>
+            <div>rainIn10min: {getRecentData(data, 'rainIntensityIn10min','na')}</div>
+            <div>rainIn30min: {getRecentData(data, 'rainIntensityIn30min','na')}</div>
           </div>
           <Divider>Damage Details</Divider>
           <div className="damage-indicator">
-            <div>Car: Porsche 911</div>
+            <div>Car: {getRecentData(data, 'carModel')}</div>
             <CarChasis carDamage={carDamage} />
             <div>Total damage: {carDamage[4]}</div>
           </div>
@@ -168,8 +190,8 @@ function App() {
           </div>
           <Divider>Version</Divider>
           <div className="user-info">
-            <div>Acc: 1.8.11</div>
-            <div>Sharedmem: 1.8</div>
+            <div>Acc: {getRecentData(data, 'acVersion')}</div>
+            <div>Sharedmem: {getRecentData(data, 'smVersion')}</div>
           </div>
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
