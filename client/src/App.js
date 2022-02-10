@@ -9,6 +9,7 @@ import GEARChart from "./components/GEARChart";
 import FFBChart from "./components/FFBChart";
 import SteerAngleChart from "./components/SteerAngleChart";
 import { getRandomValue, getRandomTwoValues } from "./utils/functions";
+import Suzuka from "./components/tracks/Suzuka";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
 
@@ -176,23 +177,20 @@ function App() {
             <div>rainIn10min: {getRecentData(data, 'rainIntensityIn10min','na')}</div>
             <div>rainIn30min: {getRecentData(data, 'rainIntensityIn30min','na')}</div>
           </div>
-          <Divider>Damage Details</Divider>
-          <div className="damage-indicator">
-            <div>Car: {getRecentData(data, 'carModel')}</div>
-            <CarChasis carDamage={carDamage} />
-            <div>Total damage: {carDamage[4]}</div>
-          </div>
           <Divider>Lap Info</Divider>
           <div className="user-info">
             <div>Position: 1</div>
             <div>currentSectorIndex: 1</div>
             <div>lastSectorTime: 1</div>
           </div>
-          <Divider>Version</Divider>
-          <div className="user-info">
-            <div>Acc: {getRecentData(data, 'acVersion')}</div>
-            <div>Sharedmem: {getRecentData(data, 'smVersion')}</div>
+          <Divider>Damage Details</Divider>
+          <div className="damage-indicator">
+            <div>Car: {getRecentData(data, 'carModel')}</div>
+            <CarChasis carDamage={carDamage} />
+            <div>Total damage: {carDamage[4]}</div>
           </div>
+          <Divider>Track</Divider>
+          <Suzuka/>
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
           <Header
