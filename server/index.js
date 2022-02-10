@@ -115,6 +115,7 @@ const startWSSServer = () => {
         rainIntensity: graphicsResult.rainIntensity,
         rainIntensityIn10min: graphicsResult.rainIntensityIn10min,
         rainIntensityIn30min: graphicsResult.rainIntensityIn30min,
+        normalizedCarPosition: graphicsResult.normalizedCarPosition,
         ...staticResult
       };
 

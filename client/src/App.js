@@ -51,11 +51,13 @@ const loadDefaultValues = () => {
       rainIntensity: "na",
       rainIntensityIn10min: "na",
       rainIntensityIn30min: "na",
+      normalizedCarPosition: 0,
       playerNick: "-",
       track: "-",
       carModel: "-",
       smVersion: "-",
-      acVersion: "-"
+      acVersion: "-",
+
     };
   });
   return defaultArray;
@@ -190,7 +192,7 @@ function App() {
             <div>Total damage: {carDamage[4]}</div>
           </div>
           <Divider>Track</Divider>
-          <Suzuka/>
+          <Suzuka normalizedCarPosition={getRecentData(data, 'normalizedCarPosition')}/>
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
           <Header
