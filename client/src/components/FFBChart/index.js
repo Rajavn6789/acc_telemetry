@@ -7,7 +7,7 @@ const ffbAccessor = {
   xAccessor: (d) => d.time,
 };
 
-const tickValues = [0, 50, 100, 150, 200, 250, 300];
+const tickValues = [0, 50, 100];
 
 const ordinalScaleObj = {
   domain: ['Force Feedback'],
