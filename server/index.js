@@ -110,6 +110,7 @@ const startWSSServer = () => {
         steerAngle: Math.round(400 * physicsResult.steerAngle), //Make it dynamic for all cars
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
+        suspensionTravel: physicsResult.suspensionTravel.map(item => item * 1000),
         time: graphicsResult.iCurrentTime/ 100,
         trackGripStatus: graphicsResult.trackGripStatus,
         rainIntensity: graphicsResult.rainIntensity,
