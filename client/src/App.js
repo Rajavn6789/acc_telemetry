@@ -9,6 +9,7 @@ import GEARChart from "./components/GEARChart";
 import FFBChart from "./components/FFBChart";
 import SteerAngleChart from "./components/SteerAngleChart";
 import SuspensionTravelChart from "./components/SuspensionTravelChart";
+import WheelSpeedChart from "./components/WheelSpeedChart";
 import { getRandomValue, getRandomTwoValues } from "./utils/functions";
 import Suzuka from "./components/tracks/Suzuka";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
@@ -48,6 +49,12 @@ const loadDefaultValues = () => {
         0, 
       ],
       suspensionTravel: [
+        0, 
+        0, 
+        0, 
+        0, 
+      ],
+      wheelAngularSpeed: [
         0, 
         0, 
         0, 
@@ -229,13 +236,13 @@ function App() {
               <FFBChart data={data} />
               <GasBrakeChart data={data} />
               <SuspensionTravelChart data={data} />
+              <WheelSpeedChart data={data} />
               <SteerAngleChart data={data} />
-
               <SpeedChart data={data} />
               <RPMChart data={data} />
               <ABSTCChart data={data} />
               <GEARChart data={data} />
-            </div>
+            </div> 
           </Content>
           <Footer style={{ textAlign: "center", padding: "12px 25px" }}>
             <div>

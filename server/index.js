@@ -111,6 +111,7 @@ const startWSSServer = () => {
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
         suspensionTravel: physicsResult.suspensionTravel.map(item => item * 1000),
+        wheelAngularSpeed: physicsResult.wheelAngularSpeed.map(item => Math.abs(Math.round(item))),
         time: graphicsResult.iCurrentTime/ 100,
         trackGripStatus: graphicsResult.trackGripStatus,
         rainIntensity: graphicsResult.rainIntensity,
@@ -136,7 +137,7 @@ connectDebug = () => {
     const physicsResult = ReadPhysics(m_physics);
     const graphicsResult = ReadGraphics(m_graphics);
     const staticResult = ReadStatic(m_static);
-    console.log('staticResult', graphicsResult.activeCars);
+    console.log('physicsResult', physicsResult.wheelAngularSpeed.map(item => Math.abs(item)));
   }, 1000);
 };
 const debug = false;
