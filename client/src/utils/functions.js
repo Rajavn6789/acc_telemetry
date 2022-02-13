@@ -18,4 +18,3 @@ export const generateRangeArr = (start, end, interval) => {
 };
 
 
-console.log(generateRangeArr(-270, 270, 90));

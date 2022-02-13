@@ -3,29 +3,29 @@ import { LineSeries, Axis, XYChart, Grid, DataContext } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 import { generateRangeArr } from "../../utils/functions";
 
-const FLAccessor = {
+// const FLAccessor = {
+//   yAccessor: (d) => d.wheelAngularSpeed[0],
+//   xAccessor: (d) => d.time,
+// };
+
+// const FRAccessor = {
+//   yAccessor: (d) => d.wheelAngularSpeed[1],
+//   xAccessor: (d) => d.time,
+// };
+
+const RLAccessor = {
   yAccessor: (d) => d.wheelAngularSpeed[0],
   xAccessor: (d) => d.time,
 };
 
-const FRAccessor = {
+const RRAccessor = {
   yAccessor: (d) => d.wheelAngularSpeed[1],
   xAccessor: (d) => d.time,
 };
 
-const RLAccessor = {
-  yAccessor: (d) => d.wheelAngularSpeed[2],
-  xAccessor: (d) => d.time,
-};
-
-const RRAccessor = {
-  yAccessor: (d) => d.wheelAngularSpeed[3],
-  xAccessor: (d) => d.time,
-};
-
 const ordinalScaleObj = {
-  domain: ["FL", "FR", "RL", "RR"],
-  range: ["orange", "yellow", "blue", "green"],
+  domain: ["RL", "RR"],
+  range: ["violet", "#1babbf"],
 };
 
 const ChartBackground = () => {
@@ -77,10 +77,10 @@ const WheelSpeedChart = ({ data }) => {
             </g>
           )}
         ></Axis>
-        <LineSeries dataKey="fl" stroke="orange" data={data} {...FLAccessor} />
-        <LineSeries dataKey="fr" stroke="yellow" data={data} {...FRAccessor} />
-        <LineSeries dataKey="rl" stroke="blue" data={data} {...RLAccessor} />
-        <LineSeries dataKey="rr" stroke="blue"  strokeDasharray={"3,3"}  data={data} {...RRAccessor} />
+        {/* <LineSeries dataKey="fl" stroke="orange" data={data} {...FLAccessor} />
+        <LineSeries dataKey="fr" stroke="yellow" data={data} {...FRAccessor} /> */}
+        <LineSeries dataKey="rlws" stroke="violet" data={data} {...RLAccessor} />
+        <LineSeries dataKey="rrws" stroke="#1babbf"   data={data} {...RRAccessor} />
       </XYChart>
       <ChartLegend scale={ordinalScaleObj} />
     </>

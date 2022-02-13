@@ -24,7 +24,7 @@ const RRAccessor = {
 
 const ordinalScaleObj = {
   domain: ["FL", "FR", "RL", "RR"],
-  range: ["orange", "yellow", "blue", "green"],
+  range: ["orange", "#f7f763", "blue", "#1babbf"],
 };
 
 const ChartBackground = () => {
@@ -76,10 +76,10 @@ const SuspensionTravelChart = ({ data }) => {
             </g>
           )}
         ></Axis>
-        <LineSeries dataKey="fl" stroke="orange" data={data} {...FLAccessor} />
-        <LineSeries dataKey="fr" stroke="yellow" data={data} {...FRAccessor} />
-        <LineSeries dataKey="rl" stroke="blue" data={data} {...RLAccessor} />
-        <LineSeries dataKey="rr" stroke="green" data={data} {...RRAccessor} />
+        <LineSeries dataKey="flst" stroke="orange" data={data} {...FLAccessor} />
+        <LineSeries dataKey="frst" stroke="#f7f763"  data={data} {...FRAccessor} />
+        <LineSeries dataKey="rlst" stroke="blue" data={data} {...RLAccessor} />
+      <LineSeries dataKey="rrst" stroke="#1babbf"  data={data} {...RRAccessor} />
       </XYChart>
       <ChartLegend scale={ordinalScaleObj} />
     </>

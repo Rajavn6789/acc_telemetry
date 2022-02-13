@@ -111,7 +111,7 @@ const startWSSServer = () => {
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
         suspensionTravel: physicsResult.suspensionTravel.map(item => item * 1000),
-        wheelAngularSpeed: physicsResult.wheelAngularSpeed.map(item => Math.abs(Math.round(item))),
+        wheelAngularSpeed: physicsResult.wheelAngularSpeed.map(item => Math.abs(Math.round(item))).slice(2, 4),
         time: graphicsResult.iCurrentTime/ 100,
         trackGripStatus: graphicsResult.trackGripStatus,
         rainIntensity: graphicsResult.rainIntensity,

@@ -17,7 +17,7 @@ const ffbAccessor = {
 const tickValues = generateRangeArr(0, 100, 20);
 
 const ordinalScaleObj = {
-  domain: ["Force Feedback"],
+  domain: ["FFB"],
   range: ["grey"],
 };
 

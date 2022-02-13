@@ -57,8 +57,6 @@ const loadDefaultValues = () => {
       wheelAngularSpeed: [
         0, 
         0, 
-        0, 
-        0, 
       ],
       trackGripStatus: "na",
       rainIntensity: "na",
