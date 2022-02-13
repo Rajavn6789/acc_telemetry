@@ -123,7 +123,7 @@ const startWSSServer = () => {
 
       const resultString = JSON.stringify(result);
       ws.send(resultString);
-    }, 1000 / 30);
+    }, 1000 / 20);
 
     ws.on("error", function message(data) {
       console.error('Socket encountered error');
