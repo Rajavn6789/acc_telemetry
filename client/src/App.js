@@ -197,7 +197,7 @@ function App() {
           />
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
-          <Header
+          {/* <Header
             style={{ position: "fixed", zIndex: 1, width: "100%", padding: 0 }}
           >
             <Menu
@@ -219,8 +219,8 @@ function App() {
                 Brakes
               </Menu.Item>
             </Menu>
-          </Header>
-          <Content style={{ marginTop: 50 }}>
+          </Header> */}
+          <Content style={{ /* marginTop: 50 */ }}>
             <div>
               <FFBChart data={data} />
               <GasBrakeChart data={data} />
