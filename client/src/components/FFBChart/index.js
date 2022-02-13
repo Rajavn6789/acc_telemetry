@@ -14,7 +14,7 @@ const ffbAccessor = {
   xAccessor: (d) => d.time,
 };
 
-const tickValues = generateRangeArr(0, 100, 20);
+const tickValues = generateRangeArr(0, 100, 50);
 
 const ordinalScaleObj = {
   domain: ["FFB"],
@@ -25,7 +25,7 @@ const FFBChart = ({ data }) => {
   return (
     <>
       <XYChart
-        height={250}
+        height={200}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 100], label: "time" }}
       >

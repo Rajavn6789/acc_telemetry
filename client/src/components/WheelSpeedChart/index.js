@@ -36,7 +36,7 @@ const ChartBackground = () => {
   );
 };
 
-const tickValues = generateRangeArr(0, 300, 50);
+const tickValues = generateRangeArr(0, 300, 25);
 
 const WheelSpeedChart = ({ data }) => {
   return (
