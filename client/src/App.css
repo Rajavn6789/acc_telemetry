@@ -55,10 +55,18 @@
   margin-top: 8px;
 }
 
-.damage-indicator, .user-info {
+
+.connection-info {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 16px 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.damage-indicator,
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
 }

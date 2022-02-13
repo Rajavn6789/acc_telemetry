@@ -33,42 +33,28 @@ const loadDefaultValues = () => {
       gas: 0,
       brake: 0,
       speed: 0,
-      time: index ,
+      time: index,
       tc: 0,
       abs: 0,
       gear: 0,
       rpm: 0,
       steerAngle: 0,
       ffb: 0,
-      airTemp:0,
+      airTemp: 0,
       roadTemp: 0,
-      carDamage: [
-        0, 
-        0, 
-        0, 
-        0, 
-      ],
-      suspensionTravel: [
-        0, 
-        0, 
-        0, 
-        0, 
-      ],
-      wheelAngularSpeed: [
-        0, 
-        0, 
-      ],
+      carDamage: [0, 0, 0, 0],
+      suspensionTravel: [0, 0, 0, 0],
+      wheelAngularSpeed: [0, 0],
       trackGripStatus: "na",
       rainIntensity: "na",
       rainIntensityIn10min: "na",
       rainIntensityIn30min: "na",
       normalizedCarPosition: 0,
-      playerNick: "-",
+      playerNick: "n/a",
       track: "-",
-      carModel: "-",
+      carModel: "n/a",
       smVersion: "-",
       acVersion: "-",
-
     };
   });
   return defaultArray;
@@ -99,7 +85,7 @@ function App() {
       const telemetryData = JSON.parse(message.data);
       // TODO: Update static values once session is on, even without telemetry
       if (telemetryData.gear >= 0) {
-        setAccStatus("online")
+        setAccStatus("online");
         setData((oldArray) => {
           let clonedArr = [...oldArray];
           if (clonedArr.length > maxItems) {
@@ -126,14 +112,13 @@ function App() {
 
   const getRecentData = (data, key, defaultVal = 0) => {
     let output;
-    if(data && data.length > 0){
-      output = data[data.length - 1][key]
+    if (data && data.length > 0) {
+      output = data[data.length - 1][key];
     } else {
       output = defaultVal;
     }
     return output;
-  }
-
+  };
 
   return (
     <>
@@ -156,23 +141,27 @@ function App() {
             <span className="sub">Realtime Analytics Tool v1.0</span>
           </div>
           <Divider>Connection</Divider>
-          <div className="user-info">
-            Server Status:{" "}
-            {connStatus === "online" ? (
-              <CheckCircleTwoTone twoToneColor="#52c41a" />
-            ) : (
-              <CloseCircleTwoTone twoToneColor="red" />
-            )}
-            ACC Status:{" "}
-            {accStatus === "online" ? (
-              <CheckCircleTwoTone twoToneColor="#52c41a" />
-            ) : (
-              <CloseCircleTwoTone twoToneColor="red" />
-            )}
+          <div className="connection-info">
+            <div>
+              <span style={{marginRight: 4}}>Server Status:</span>
+              {connStatus === "online" ? (
+                <CheckCircleTwoTone twoToneColor="#52c41a" />
+              ) : (
+                <CloseCircleTwoTone twoToneColor="red" />
+              )}
+            </div>
+            <div>
+              <span style={{marginRight: 4}}>ACC Status:</span>
+              {accStatus === "online" ? (
+                <CheckCircleTwoTone twoToneColor="#52c41a" />
+              ) : (
+                <CloseCircleTwoTone twoToneColor="red" />
+              )}
+            </div>
           </div>
           <Divider>User Info</Divider>
           <div className="user-info">
-            <div>Name: {getRecentData(data, 'playerNick')}</div>
+            <div>Name: {getRecentData(data, "playerNick")}</div>
             <div>Online: Yes</div>
           </div>
           {/* <Divider>ACC Info</Divider>
@@ -198,12 +187,14 @@ function App() {
           </div> */}
           <Divider>Damage Details</Divider>
           <div className="damage-indicator">
-            <div>Car: {getRecentData(data, 'carModel')}</div>
+            <div>Car: {getRecentData(data, "carModel")}</div>
             <CarChasis carDamage={carDamage} />
             <div>Total damage: {carDamage[4]}</div>
           </div>
           <Divider>Track</Divider>
-          <Suzuka normalizedCarPosition={getRecentData(data, 'normalizedCarPosition')}/>
+          <Suzuka
+            normalizedCarPosition={getRecentData(data, "normalizedCarPosition")}
+          />
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
           <Header
@@ -240,7 +231,7 @@ function App() {
               <SpeedChart data={data} />
               <RPMChart data={data} />
               <GEARChart data={data} />
-            </div> 
+            </div>
           </Content>
           <Footer style={{ textAlign: "center", padding: "12px 25px" }}>
             <div>
