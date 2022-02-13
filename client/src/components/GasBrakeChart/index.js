@@ -1,6 +1,7 @@
 import React from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
+import { generateRangeArr } from "../../utils/functions";
 
 const gasAccessor = {
   yAccessor: (d) => d.gas,
@@ -17,6 +18,8 @@ const ordinalScaleObj = {
   range: ["green", "red"],
 };
 
+const tickValues = generateRangeArr(0, 1, 0.2);
+
 const GasBrakeChart = ({ data }) => {
   return (
     <>
@@ -29,13 +32,14 @@ const GasBrakeChart = ({ data }) => {
         <Grid
           rows={true}
           columns={false}
-          numTicks={10}
+          numTicks={tickValues.length}
           strokeWidth={1}
           strokeOpacity={0.1}
           strokeDasharray="5,2"
         />
         <Axis
           orientation="left"
+          tickValues={tickValues}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
@@ -46,6 +50,7 @@ const GasBrakeChart = ({ data }) => {
         ></Axis>
         <Axis
           orientation="right"
+          tickValues={tickValues}
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>

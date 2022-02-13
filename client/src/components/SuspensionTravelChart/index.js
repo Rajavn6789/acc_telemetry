@@ -60,7 +60,7 @@ const SuspensionTravelChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-                {formattedValue}mm
+                {formattedValue}
               </text>
             </g>
           )}
@@ -71,7 +71,7 @@ const SuspensionTravelChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-                {formattedValue}mm
+                {formattedValue}
               </text>
             </g>
           )}

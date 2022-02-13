@@ -51,7 +51,7 @@ const ABSTCChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-                {formattedValue}
+                {Math.round(formattedValue)}
               </text>
             </g>
           )}
@@ -62,7 +62,7 @@ const ABSTCChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-                {formattedValue}
+                {Math.round(formattedValue)}
               </text>
             </g>
           )}

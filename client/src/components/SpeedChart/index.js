@@ -1,13 +1,14 @@
 import React from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
+import { generateRangeArr } from "../../utils/functions";
 
 const speedAccessor = {
   yAccessor: (d) => d.speed,
   xAccessor: (d) => d.time,
 };
 
-const tickValues = [0, 50, 100, 150, 200, 250, 300];
+const tickValues = generateRangeArr(0, 300, 50);
 
 const ordinalScaleObj = {
   domain: ["speed"],

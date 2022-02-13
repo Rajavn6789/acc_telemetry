@@ -1,13 +1,14 @@
 import React from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
+import { generateRangeArr } from "../../utils/functions";
 
 const steerAngleAccessor = {
   yAccessor: (d) => d.steerAngle,
   xAccessor: (d) => d.time,
 };
 
-const tickValues = [-400, -200, 0, 200, 400];
+const tickValues = generateRangeArr(-270, 270, 90);
 
 const ordinalScaleObj = {
   domain: ["Steering"],
@@ -20,7 +21,7 @@ const SteerAngleChart = ({ data }) => {
       <XYChart
         height={250}
         xScale={{ type: "band" }}
-        yScale={{ type: "linear", domain: [-200, 200] }}
+        yScale={{ type: "linear", domain: [-270, 270] }}
       >
         <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
         <Grid
