@@ -175,7 +175,7 @@ function App() {
             <div>Name: {getRecentData(data, 'playerNick')}</div>
             <div>Online: Yes</div>
           </div>
-          <Divider>ACC Info</Divider>
+          {/* <Divider>ACC Info</Divider>
           <div className="user-info">
             <div>ACC Status: Replay</div>
             <div>Session Type: Race</div>
@@ -195,7 +195,7 @@ function App() {
             <div>Position: 1</div>
             <div>currentSectorIndex: 1</div>
             <div>lastSectorTime: 1</div>
-          </div>
+          </div> */}
           <Divider>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, 'carModel')}</div>
@@ -233,12 +233,12 @@ function App() {
             <div>
               <FFBChart data={data} />
               <GasBrakeChart data={data} />
+              <ABSTCChart data={data} />
               <SuspensionTravelChart data={data} />
               <WheelSpeedChart data={data} />
               <SteerAngleChart data={data} />
               <SpeedChart data={data} />
               <RPMChart data={data} />
-              <ABSTCChart data={data} />
               <GEARChart data={data} />
             </div> 
           </Content>
