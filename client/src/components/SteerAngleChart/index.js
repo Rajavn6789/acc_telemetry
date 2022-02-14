@@ -19,7 +19,7 @@ const SteerAngleChart = ({ data }) => {
   return (
     <>
       <XYChart
-        height={250}
+        height={300}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [-270, 270] }}
       >

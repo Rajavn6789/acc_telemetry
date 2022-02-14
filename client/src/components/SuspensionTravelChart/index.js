@@ -1,6 +1,7 @@
 import React from "react";
 import { LineSeries, Axis, XYChart, Grid, DataContext } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
+import { generateRangeArr } from "../../utils/functions";
 
 const FLAccessor = {
   yAccessor: (d) => d.suspensionTravel[0],
@@ -35,7 +36,7 @@ const ChartBackground = () => {
   );
 };
 
-const tickValues = [0, 5, 10, 15, 20, 25, 30, 35, 40];
+const tickValues = generateRangeArr(0, 45, 5);
 
 const SuspensionTravelChart = ({ data }) => {
   return (
@@ -43,7 +44,7 @@ const SuspensionTravelChart = ({ data }) => {
       <XYChart
         height={300}
         xScale={{ type: "band" }}
-        yScale={{ type: "linear", domain: [0, 40] }}
+        yScale={{ type: "linear", domain: [0, 45] }}
       >
         <ChartBackground />
         <Grid
