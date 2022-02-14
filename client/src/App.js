@@ -164,7 +164,6 @@ function App() {
           <Divider>User Info</Divider>
           <div className="user-info">
             <div>Name: {getRecentData(data, "playerNick")}</div>
-            <div>Online: Yes</div>
           </div>
           <Divider>Damage Details</Divider>
           <div className="damage-indicator">

@@ -11,7 +11,7 @@ const steerAngleAccessor = {
 const tickValues = generateRangeArr(-270, 270, 90);
 
 const ordinalScaleObj = {
-  domain: ["Steering"],
+  domain: ["Steering °"],
   range: ["orange"],
 };
 

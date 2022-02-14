@@ -24,8 +24,8 @@ const RRAccessor = {
 };
 
 const ordinalScaleObj = {
-  domain: ["FL", "FR", "RL", "RR"],
-  range: ["orange", "#f7f763", "blue", "#1babbf"],
+  domain: ["Suspension Travel (mm)", "FL", "FR", "RL", "RR"],
+  range: ["", "orange", "#f7f763", "blue", "#1babbf"],
 };
 
 const ChartBackground = () => {

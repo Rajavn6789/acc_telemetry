@@ -24,8 +24,8 @@ const RRAccessor = {
 };
 
 const ordinalScaleObj = {
-  domain: ["RL", "RR"],
-  range: ["violet", "#1babbf"],
+  domain: ["Wheel Speed (kph)", "RL", "RR"],
+  range: ["", "violet", "#1babbf"],
 };
 
 const ChartBackground = () => {

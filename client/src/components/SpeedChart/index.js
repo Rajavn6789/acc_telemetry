@@ -11,7 +11,7 @@ const speedAccessor = {
 const tickValues = generateRangeArr(0, 300, 50);
 
 const ordinalScaleObj = {
-  domain: ["speed"],
+  domain: ["speed (kph)"],
   range: ["green"],
 };
 

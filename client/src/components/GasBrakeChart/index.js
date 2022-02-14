@@ -14,7 +14,7 @@ const brakeAccessor = {
 };
 
 const ordinalScaleObj = {
-  domain: ["Throttle", "Brake"],
+  domain: ["Throttle (%)", "Brake (%)"],
   range: ["green", "red"],
 };
 
