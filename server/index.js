@@ -105,18 +105,14 @@ const startWSSServer = () => {
         abs: physicsResult.abs,
         gear: physicsResult.gear,
         rpm: physicsResult.rpm,
-        // airTemp: Math.floor(physicsResult.airTemp),
-        // roadTemp: Math.floor(physicsResult.roadTemp),
+        isEngineRunning: physicsResult.rpm > 1000,
         steerAngle: Math.round(400 * physicsResult.steerAngle), //Make it dynamic for all cars
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
         suspensionTravel: physicsResult.suspensionTravel.map(item => item * 1000),
         wheelAngularSpeed: physicsResult.wheelAngularSpeed.map(item => Math.abs(Math.round(item))).slice(2, 4),
+        accG:  physicsResult.accG.map(val => Math.floor((val + Number.EPSILON) * 100) / 100 ),
         time: graphicsResult.iCurrentTime/ 100,
-        // trackGripStatus: graphicsResult.trackGripStatus,
-        // rainIntensity: graphicsResult.rainIntensity,
-        // rainIntensityIn10min: graphicsResult.rainIntensityIn10min,
-        // rainIntensityIn30min: graphicsResult.rainIntensityIn30min,
         normalizedCarPosition: graphicsResult.normalizedCarPosition,
         ...staticResult
       };
@@ -137,7 +133,7 @@ connectDebug = () => {
     const physicsResult = ReadPhysics(m_physics);
     const graphicsResult = ReadGraphics(m_graphics);
     const staticResult = ReadStatic(m_static);
-    console.log('physicsResult', physicsResult.wheelAngularSpeed.map(item => Math.abs(item)));
+    console.log("graphicsResult.Clock", physicsResult.rpm)
   }, 1000);
 };
 const debug = false;

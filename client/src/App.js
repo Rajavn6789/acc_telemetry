@@ -10,7 +10,7 @@ import FFBChart from "./components/FFBChart";
 import SteerAngleChart from "./components/SteerAngleChart";
 import SuspensionTravelChart from "./components/SuspensionTravelChart";
 import WheelSpeedChart from "./components/WheelSpeedChart";
-import { getRandomValue, getRandomTwoValues } from "./utils/functions";
+import GforceChart from "./components/GforceChart";
 import Suzuka from "./components/tracks/Suzuka";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
@@ -42,7 +42,8 @@ const loadDefaultValues = () => {
       ffb: 0,
       airTemp: 0,
       roadTemp: 0,
-      carDamage: [0, 0, 0, 0],
+      accG: [0, 0, 0],
+      carDamage: [0, 0, 0, 0, 0],
       suspensionTravel: [0, 0, 0, 0],
       wheelAngularSpeed: [0, 0],
       trackGripStatus: "na",
@@ -83,13 +84,14 @@ function App() {
 
     webSocket.current.onmessage = (message) => {
       const telemetryData = JSON.parse(message.data);
-      // TODO: Update static values once session is on, even without telemetry
-      if (telemetryData.gear >= 0) {
+      if (telemetryData.isEngineRunning) {
         setAccStatus("online");
         setData((oldArray) => {
           let clonedArr = [...oldArray];
           if (clonedArr.length > maxItems) {
             clonedArr.shift();
+          } else {
+            clonedArr = clonedArr;
           }
           return [...clonedArr, telemetryData];
         });
@@ -143,7 +145,7 @@ function App() {
           <Divider>Connection</Divider>
           <div className="connection-info">
             <div>
-              <span style={{marginRight: 4}}>Server Status:</span>
+              <span style={{ marginRight: 4 }}>Server Status:</span>
               {connStatus === "online" ? (
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
               ) : (
@@ -151,7 +153,7 @@ function App() {
               )}
             </div>
             <div>
-              <span style={{marginRight: 4}}>ACC Status:</span>
+              <span style={{ marginRight: 4 }}>ACC Telemetry:</span>
               {accStatus === "online" ? (
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
               ) : (
@@ -164,33 +166,14 @@ function App() {
             <div>Name: {getRecentData(data, "playerNick")}</div>
             <div>Online: Yes</div>
           </div>
-          {/* <Divider>ACC Info</Divider>
-          <div className="user-info">
-            <div>ACC Status: Replay</div>
-            <div>Session Type: Race</div>
-            <div>Clock: 12:00</div>
-          </div>
-          <Divider>Weather Info</Divider>
-          <div className="user-info">
-          <div>Air Temp: {getRecentData(data, 'airTemp')}&deg;C</div>
-          <div>Road Temp: {getRecentData(data, 'roadTemp')}&deg;C</div>
-            <div>trackGripStatus: {getRecentData(data, 'trackGripStatus', 'na')}</div>
-            <div>rain: {getRecentData(data, 'rainIntensity','na')}</div>
-            <div>rainIn10min: {getRecentData(data, 'rainIntensityIn10min','na')}</div>
-            <div>rainIn30min: {getRecentData(data, 'rainIntensityIn30min','na')}</div>
-          </div>
-          <Divider>Lap Info</Divider>
-          <div className="user-info">
-            <div>Position: 1</div>
-            <div>currentSectorIndex: 1</div>
-            <div>lastSectorTime: 1</div>
-          </div> */}
           <Divider>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, "carModel")}</div>
             <CarChasis carDamage={carDamage} />
             <div>Total damage: {carDamage[4]}</div>
           </div>
+          <Divider>GForce meter</Divider>
+          <GforceChart accG={getRecentData(data, "accG")} />
           <Divider>Track</Divider>
           <Suzuka
             normalizedCarPosition={getRecentData(data, "normalizedCarPosition")}
@@ -220,7 +203,13 @@ function App() {
               </Menu.Item>
             </Menu>
           </Header> */}
-          <Content style={{ /* marginTop: 50 */ }}>
+          <Content
+            style={
+              {
+                /* marginTop: 50 */
+              }
+            }
+          >
             <div>
               <FFBChart data={data} />
               <GasBrakeChart data={data} />
