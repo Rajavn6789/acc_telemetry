@@ -1,28 +1,24 @@
 const WebSocket = require("ws");
 const NodeIPC = require("@fynnix/node-easy-ipc");
-const ReadStatic = require("./utils/sharedmem/static")
-const ReadPhysics = require("./utils/sharedmem/physics")
-const ReadGraphics = require("./utils/sharedmem/graphics")
+const ReadStatic = require("./utils/sharedmem/static");
+const ReadPhysics = require("./utils/sharedmem/physics");
+const ReadGraphics = require("./utils/sharedmem/graphics");
 
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
 
 let m_graphics = new NodeIPC.FileMapping();
 let m_physics = new NodeIPC.FileMapping();
-let m_static =  new NodeIPC.FileMapping();
+let m_static = new NodeIPC.FileMapping();
 
 /* Web Server - for static data */
 
 const app = express();
 
-const ads = [
-  {title: 'Hello, world (again)!'}
-];
+const ads = [{ title: "Hello, world (again)!" }];
 
 app.use(helmet());
 
@@ -30,10 +26,10 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use(morgan('combined'));
+app.use(morgan("combined"));
 
 // defining an endpoint to return all ads
-app.get('/static', (req, res) => {
+app.get("/static", (req, res) => {
   const staticResult = ReadStatic(m_static);
   const result = {
     smVersion: staticResult.smVersion.join(""),
@@ -45,26 +41,23 @@ app.get('/static', (req, res) => {
     playerName: staticResult.playerName.join(""),
     playerSurname: staticResult.playerSurname.join(""),
     playerNick: staticResult.playerNick.join(""),
-  }
-  
+  };
+
   res.send(result);
 });
 
 // starting the web server
 app.listen(8080, () => {
-  console.log('Webserver started at port 8080');
+  console.log("Webserver started at port 8080");
 });
-
 
 /* Web Sockets - for frequently changing data */
 const startWSSServer = () => {
-  
   const wss = new WebSocket.Server({ port: 8081 }, () =>
     console.log("Socker started at port: 8081")
   );
 
   wss.on("connection", function connection(ws, request, client) {
-
     ws.on("open", function open() {
       console.log("connected");
     });
@@ -86,7 +79,6 @@ const startWSSServer = () => {
       const graphicsResult = ReadGraphics(m_graphics);
       const static = ReadStatic(m_static);
 
-
       const staticResult = {
         smVersion: static.smVersion.join(""),
         acVersion: static.acVersion.join(""),
@@ -95,6 +87,8 @@ const startWSSServer = () => {
         playerName: static.playerName.join(""),
         playerSurname: static.playerSurname.join(""),
         playerNick: static.playerNick.join(""),
+        track: static.track,
+        isMultiplayer: static.isOnline,
       };
 
       const result = {
@@ -109,12 +103,20 @@ const startWSSServer = () => {
         steerAngle: Math.round(400 * physicsResult.steerAngle), //Make it dynamic for all cars
         ffb: Math.round(Math.abs(physicsResult.finalFF * 100)),
         carDamage: physicsResult.carDamage,
-        suspensionTravel: physicsResult.suspensionTravel.map(item => item * 1000),
-        wheelAngularSpeed: physicsResult.wheelAngularSpeed.map(item => Math.abs(Math.round(item))).slice(2, 4),
-        accG:  physicsResult.accG.map(val => Math.floor((val + Number.EPSILON) * 100) / 100 ),
-        time: graphicsResult.iCurrentTime/ 100,
+        suspensionTravel: physicsResult.suspensionTravel.map(
+          (item) => item * 1000
+        ),
+        wheelAngularSpeed: physicsResult.wheelAngularSpeed
+          .map((item) => Math.abs(Math.round(item)))
+          .slice(2, 4),
+        accG: physicsResult.accG.map(
+          (val) => Math.floor((val + Number.EPSILON) * 100) / 100
+        ),
+        time: graphicsResult.iCurrentTime / 100,
         normalizedCarPosition: graphicsResult.normalizedCarPosition,
-        ...staticResult
+        exhaustTemperature: Math.round(graphicsResult.exhaustTemperature),
+        trackGripStatus: graphicsResult.trackGripStatus,
+        ...staticResult,
       };
 
       const resultString = JSON.stringify(result);
@@ -122,7 +124,7 @@ const startWSSServer = () => {
     }, 1000 / 20);
 
     ws.on("error", function message(data) {
-      console.error('Socket encountered error');
+      console.error("Socket encountered error");
       ws.close();
     });
   });
@@ -133,14 +135,12 @@ connectDebug = () => {
     const physicsResult = ReadPhysics(m_physics);
     const graphicsResult = ReadGraphics(m_graphics);
     const staticResult = ReadStatic(m_static);
-    console.log("graphicsResult.Clock", physicsResult.rpm)
+    console.log("graphicsResult.Clock", physicsResult.rpm);
   }, 1000);
 };
 const debug = false;
-if(debug){
+if (debug) {
   connectDebug();
 } else {
   startWSSServer();
 }
-
-

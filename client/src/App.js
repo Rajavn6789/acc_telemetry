@@ -161,9 +161,11 @@ function App() {
               )}
             </div>
           </div>
-          <Divider>User Info</Divider>
+          <Divider>Info</Divider>
           <div className="user-info">
-            <div>Name: {getRecentData(data, "playerNick")}</div>
+            <div>User: {getRecentData(data, "playerNick")}</div>
+            <div>Track: {getRecentData(data, "track")}</div>
+            <div>Grip: {getRecentData(data, "trackGripStatus")}</div>
           </div>
           <Divider>Damage Details</Divider>
           <div className="damage-indicator">
@@ -173,10 +175,10 @@ function App() {
           </div>
           <Divider>GForce meter</Divider>
           <GforceChart accG={getRecentData(data, "accG")} />
-          <Divider>Track</Divider>
+          {/* <Divider>Track</Divider>
           <Suzuka
             normalizedCarPosition={getRecentData(data, "normalizedCarPosition")}
-          />
+          /> */}
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
           {/* <Header
@@ -221,11 +223,12 @@ function App() {
               <GEARChart data={data} />
             </div>
           </Content>
-          <Footer style={{ textAlign: "center", padding: "12px 25px" }}>
+          <Footer style={{ textAlign: "center", padding: "12px 25px", display:"flex", justifyContent:"space-between" }}>
             <div>
               ©2022 Designed and Developed by Raja (Data you see is realtime, no
               data is saved for post analysis)
             </div>
+            <div>sharedMemVersion: {getRecentData(data, "smVersion")}</div>
           </Footer>
         </Layout>
       </Layout>

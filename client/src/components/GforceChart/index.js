@@ -5,8 +5,8 @@ import { Axis } from "@visx/axis";
 import { generateRangeArr } from "../../utils/functions";
 
 
-const min = -2;
-const max = 2; 
+const min = -2.5;
+const max = 2.5; 
 
 const hTickValues = generateRangeArr(min, max, 1);
 const vTickValues = generateRangeArr(min, max, 1);

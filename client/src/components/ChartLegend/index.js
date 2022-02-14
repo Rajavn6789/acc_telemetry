@@ -19,7 +19,6 @@ const ChartLegend = ({ scale }) => {
         {(labels) => (
           <div style={{ display: "flex", flexDirection: "row" }}>
             {labels.map((label, i) => {
-              let labelValue;
               let isStrokeDash;
               if (label.text.includes("_")) {
                 isStrokeDash = true;
