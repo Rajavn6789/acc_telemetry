@@ -75,6 +75,7 @@ function App() {
 
     webSocket.current.onopen = () => {
       setConnStatus("online");
+      webSocket.current.send(JSON.stringify({ msg: "ready_to_receive" }));
     };
 
     webSocket.current.onclose = () => {
@@ -223,7 +224,14 @@ function App() {
               <GEARChart data={data} />
             </div>
           </Content>
-          <Footer style={{ textAlign: "center", padding: "12px 25px", display:"flex", justifyContent:"space-between" }}>
+          <Footer
+            style={{
+              textAlign: "center",
+              padding: "12px 25px",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <div>
               ©2022 Designed and Developed by Raja (Data you see is realtime, no
               data is saved for post analysis)

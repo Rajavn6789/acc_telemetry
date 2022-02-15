@@ -6,15 +6,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
-    "@fynnix/node-easy-ipc": "^1.0.8",
-    "binutils": "^0.1.0",
-    "body-parser": "^1.19.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.2",
-    "helmet": "^5.0.2",
-    "morgan": "^1.10.0",
-    "node-ipc": "^10.1.0",
-    "save": "^2.4.0",
+    "acc-node-wrapper": "github:Rajavn6789/acc-node-wrapper",
     "ws": "^8.4.2"
   },
   "keywords": [],
