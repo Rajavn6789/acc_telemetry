@@ -71,7 +71,7 @@ function App() {
   useEffect(() => {
     setData(loadDefaultValues());
 
-    webSocket.current = new WebSocket("ws://127.0.0.1:8081");
+    webSocket.current = new WebSocket("ws://127.0.0.1:8080");
 
     webSocket.current.onopen = () => {
       setConnStatus("online");

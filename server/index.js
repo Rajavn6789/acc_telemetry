@@ -2,10 +2,10 @@ const WebSocket = require("ws");
 const ACCNodeWrapper = require("acc-node-wrapper");
 const wrapper = new ACCNodeWrapper();
 
-/* Web Sockets - for frequently changing data */
+/* Web Sockets */
 const startWSSServer = () => {
-  const wss = new WebSocket.Server({ port: 8081 }, () =>
-    console.log("Socker started at port: 8081")
+  const wss = new WebSocket.Server({ port: 8080 }, () =>
+    console.log("Telemetry server started at port: 8080")
   );
 
   wss.on("connection", (ws) => {
@@ -14,9 +14,8 @@ const startWSSServer = () => {
     });
 
     ws.on("message", (data) => {
-      console.log("message from client");
       if (JSON.parse(data).msg === "ready_to_receive") {
-        // send data to websocket
+        console.log("UI connected and ready to receive");
         setInterval(() => {
           const { m_physics_result, m_graphics_result, m_static_result } =
             wrapper.getAllSharedMemory();
@@ -31,9 +30,7 @@ const startWSSServer = () => {
             isEngineRunning: m_physics_result.rpms > 1000,
             steerAngle: Math.round(400 * m_physics_result.steerAngle), //Make it dynamic for all cars
             ffb: Math.round(Math.abs(m_physics_result.finalFF * 100)),
-            carDamage: m_physics_result.carDamage.map(
-              (val) => Math.round(val)
-            ),
+            carDamage: m_physics_result.carDamage.map((val) => Math.round(val)),
             suspensionTravel: m_physics_result.suspensionTravel.map(
               (item) => item * 1000
             ),
@@ -45,9 +42,6 @@ const startWSSServer = () => {
             ),
             time: m_graphics_result.iCurrentTime / 100,
             normalizedCarPosition: m_graphics_result.normalizedCarPosition,
-            exhaustTemperature: Math.round(
-              m_graphics_result.exhaustTemperature
-            ),
             trackGripStatus: m_graphics_result.trackGripStatus,
             smVersion: m_static_result.smVersion.join(""),
             acVersion: m_static_result.acVersion.join(""),
@@ -81,3 +75,27 @@ const startWSSServer = () => {
 };
 
 startWSSServer();
+
+process.stdin.resume(); //so the program will not close instantly
+
+function exitHandler(options, exitCode) {
+  if (options.cleanup) console.log("clean");
+  if (exitCode || exitCode === 0) {
+    wrapper.clearAllSharedMemory();
+    console.log("Telemetry server stopped");
+  };
+  if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on("exit", exitHandler.bind(null, { cleanup: true }));
+
+//catches ctrl+c event
+process.on("SIGINT", exitHandler.bind(null, { exit: true }));
+
+// catches "kill pid" (for example: nodemon restart)
+process.on("SIGUSR1", exitHandler.bind(null, { exit: true }));
+process.on("SIGUSR2", exitHandler.bind(null, { exit: true }));
+
+//catches uncaught exceptions
+process.on("uncaughtException", exitHandler.bind(null, { exit: true }));

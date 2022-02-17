@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "package": "pkg index.js --targets node14-win-x64"
   },
   "dependencies": {
     "acc-node-wrapper": "github:Rajavn6789/acc-node-wrapper",
     "ws": "^8.4.2"
   },
   "keywords": [],
-  "author": "Rajavenkateshwaran S",
+  "author": "Raja S <rajavn6789@gmail.com>",
   "license": "ISC",
-  "description": ""
+  "description": "Telemetry app for assetocorsacompetizone",
+  "devDependencies": {
+    "pkg": "^5.5.2"
+  }
 }
