@@ -1,19 +1,20 @@
 {
-  "name": "server",
+  "name": "accrat-server",
   "version": "1.0.0",
+  "private": true,
+  "author": "Raja S <rajavn6789@gmail.com>",
+  "description": "ACCRAT realtime telemetry app",
+  "keywords": [],
+  "license": "ISC",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "package": "pkg index.js --targets node14-win-x64"
+    "package": "pkg index.js --targets node14-win-x64 -o accratserver"
   },
   "dependencies": {
     "acc-node-wrapper": "github:Rajavn6789/acc-node-wrapper",
     "ws": "^8.4.2"
   },
-  "keywords": [],
-  "author": "Raja S <rajavn6789@gmail.com>",
-  "license": "ISC",
-  "description": "Telemetry app for assetocorsacompetizone",
   "devDependencies": {
     "pkg": "^5.5.2"
   }
