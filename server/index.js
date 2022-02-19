@@ -54,7 +54,7 @@ const startWSSServer = () => {
             isMultiplayer: m_static_result.isOnline,
           };
           ws.send(JSON.stringify(result));
-        }, 1000 / 10);
+        }, 1000 / 20);
       } else {
         console.log("invalid message skip sending data");
       }
