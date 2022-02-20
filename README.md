@@ -1,8 +1,9 @@
 ## ACC Telemetry
 ### Introduction
-A realtime telemetry app for [Assetto Corsa Compitizione](https://www.assettocorsa.it/competizione/). With ***acc-telemetry*** you can visualise the realtime telemetry data from the Assetto Corsa Compitizione in the form of graphs.
+A realtime telemetry app for [Assetto Corsa Compitizione](https://www.assettocorsa.it/competizione/).
 
-##### Supported Graphs
+With ***acc-telemetry*** you can visualise the realtime telemetry data from the Assetto Corsa Compitizione in the form of graphs. Below are the supported graphs as of v1.0
+
 - Force Feedback Graph -  to monitor and fix FFB clipping.
 - Throttle-Brake Graph - to monitor throttle brake overlapping.
 - ABS-TC Graph -  to understand when and how long ABS or TC is getting triggered.
@@ -24,7 +25,7 @@ A realtime telemetry app for [Assetto Corsa Compitizione](https://www.assettocor
 ```sh
 git clone https://github.com/Rajavn6789/acc_telemetry.git
 ```
-| Server would start at port 8080
+> Server would start at port 8080
 2. Install the dependencies and start telemetry server
 ```sh
 cd server
