@@ -70,7 +70,7 @@ const GforceChart = ({ accG }) => {
           <circle
             key={`brake-accl`}
             cx={0}
-            cy={verticalScale(accG[2])}
+            cy={verticalScale(-accG[2])}
             fill={"red"}
             r={circleRadius}
           />
@@ -81,7 +81,6 @@ const GforceChart = ({ accG }) => {
             fill={"green"}
             r={circleRadius}
           />
-         
         </Group>
         <text  transform="translate(115,240)">A</text>
         <text  transform="translate(115, 10)">B</text>
