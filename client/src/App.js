@@ -128,35 +128,34 @@ function App() {
     setCurrView(key);
   };
 
-
-  const renderCharts = () =>{
+  const renderCharts = () => {
     let element;
-    if(currView === "basic"){
+    if (currView === "basic") {
       element = (
         <>
-        <FFBChart data={data} />
-        <GasBrakeChart data={data} />
-        <ABSTCChart data={data} />
-        <SteerAngleChart data={data} />
-        <SpeedChart data={data} />
-        <RPMChart data={data} />
-        <GEARChart data={data} />
-      </>
+          <FFBChart data={data} />
+          <GasBrakeChart data={data} />
+          <ABSTCChart data={data} />
+          <SteerAngleChart data={data} />
+          <SpeedChart data={data} />
+          <RPMChart data={data} />
+          <GEARChart data={data} />
+        </>
       );
-    } else if(currView === "advanced") {
+    } else if (currView === "advanced") {
       element = (
         <>
-        <SpeedChart data={data} />
-        <SuspensionTravelChart data={data} />
-        <WheelSpeedChart data={data} />
-        <GasBrakeChart data={data} />
+          <SpeedChart data={data} />
+          <SuspensionTravelChart data={data} />
+          <WheelSpeedChart data={data} />
+          <GasBrakeChart data={data} />
         </>
       );
     } else {
       element = null;
     }
     return element;
-  }
+  };
 
   return (
     <>
@@ -178,7 +177,7 @@ function App() {
             <span className="logo">ACCTelemetry</span>
             <span className="sub">v1.0</span>
           </div>
-          <Divider style={{ margin: "32px 0" }}>Connection</Divider>
+          <Divider style={{ margin: "24px 0" }}>Connection</Divider>
           <div className="connection-info">
             <div>
               <span style={{ marginRight: 4 }}>Server:</span>
@@ -197,20 +196,28 @@ function App() {
               )}
             </div>
           </div>
-          <Divider style={{ margin: "32px 0" }}>Info</Divider>
+          <Divider style={{ margin: "24px 0" }}>Info</Divider>
           <div className="user-info">
             <div>User: {getRecentData(data, "playerNick")}</div>
             <div>Track: {getRecentData(data, "track")}</div>
             <div>Grip: {getRecentData(data, "trackGripStatus")}</div>
           </div>
-          <Divider style={{ margin: "32px 0" }}>Damage Details</Divider>
+          <Divider style={{ margin: "24px 0" }}>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, "carModel")}</div>
             <CarChasis carDamage={carDamage} />
             <div>Total damage: {carDamage[4]}</div>
           </div>
-          <Divider style={{ margin: "32px 0" }}>GForce meter</Divider>
+          <Divider style={{ margin: "24px 0" }}>GForce meter</Divider>
           <GforceChart accG={getRecentData(data, "accG")} />
+          <Divider style={{ margin: "24px 0" }}>Note</Divider>
+          <div style={{padding: "0px 32px"}}>
+            This tool utilises ACC shared memory and telemtry you see is served realtime. 
+          </div>
+          <Divider style={{ margin: "24px 0" }}>Contact</Divider>
+          <div style={{padding: "0px 32px"}}>
+           Send your suggestions/feedbacks to rajavn6789@gmail.com
+          </div>
           {/* <Divider style={{margin: "32px 0"}}>Track</Divider>
           <Suzuka
             normalizedCarPosition={getRecentData(data, "normalizedCarPosition")}
@@ -228,14 +235,14 @@ function App() {
             >
               <Menu.Item
                 key="basic"
-                onClick={({key}) => handleViewChange(key)}
+                onClick={({ key }) => handleViewChange(key)}
                 icon={<PieChartOutlined />}
               >
                 Basic
               </Menu.Item>
               <Menu.Item
                 key="advanced"
-                onClick={({key}) => handleViewChange(key)}
+                onClick={({ key }) => handleViewChange(key)}
                 icon={<DesktopOutlined />}
               >
                 Advanced
@@ -246,26 +253,21 @@ function App() {
             style={{
               marginTop: 50,
               minHeight: "calc(100vh)",
-              background: "black"
+              background: "black",
             }}
           >
-            <div>
-              {renderCharts()}
-            </div>
+            <div>{renderCharts()}</div>
           </Content>
           <Footer
             style={{
-              textAlign: "center",
+              justifyContent: "center",
               padding: "12px 25px",
               display: "flex",
-              justifyContent: "space-between",
             }}
           >
             <div>
-              ©2022 Designed and Developed by Raja (Data you see is realtime, no
-              data is saved for post analysis)
+              ©2022 | Developed by Raja 
             </div>
-            <div>sharedMemVersion: {getRecentData(data, "smVersion")}</div>
           </Footer>
         </Layout>
       </Layout>
