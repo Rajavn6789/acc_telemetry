@@ -16,10 +16,11 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
 
 import {
-  DesktopOutlined,
-  PieChartOutlined,
+  LineChartOutlined,
+  BarChartOutlined,
   CheckCircleTwoTone,
   CloseCircleTwoTone,
+  GithubOutlined,
 } from "@ant-design/icons";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -210,13 +211,9 @@ function App() {
           </div>
           <Divider style={{ margin: "24px 0" }}>GForce meter</Divider>
           <GforceChart accG={getRecentData(data, "accG")} />
-          <Divider style={{ margin: "24px 0" }}>Note</Divider>
-          <div style={{padding: "0px 32px"}}>
-            This tool utilises ACC shared memory and telemtry you see is served realtime. 
-          </div>
           <Divider style={{ margin: "24px 0" }}>Contact</Divider>
-          <div style={{padding: "0px 32px"}}>
-           Send your suggestions/feedbacks to rajavn6789@gmail.com
+          <div style={{ padding: "0px 32px" }}>
+            Send your suggestions/feedbacks to rajavn6789@gmail.com
           </div>
           {/* <Divider style={{margin: "32px 0"}}>Track</Divider>
           <Suzuka
@@ -225,7 +222,14 @@ function App() {
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
           <Header
-            style={{ position: "fixed", zIndex: 1, width: "100%", padding: 0 }}
+            style={{
+              position: "fixed",
+              background: "#292c30",
+              zIndex: 1,
+              width: "100%",
+              padding: 0,
+              display: "flex",
+            }}
           >
             <Menu
               theme="dark"
@@ -236,16 +240,29 @@ function App() {
               <Menu.Item
                 key="basic"
                 onClick={({ key }) => handleViewChange(key)}
-                icon={<PieChartOutlined />}
+                icon={<LineChartOutlined />}
               >
                 Basic
               </Menu.Item>
               <Menu.Item
                 key="advanced"
                 onClick={({ key }) => handleViewChange(key)}
-                icon={<DesktopOutlined />}
+                icon={<BarChartOutlined  />}
               >
                 Advanced
+              </Menu.Item>
+              <Menu.Item
+                key="github"
+                icon={<GithubOutlined />}
+                style={{ marginLeft: 'auto' }}
+              >
+                <a
+                  href="https://github.com/Rajavn6789/acc_telemetry"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github
+                </a>
               </Menu.Item>
             </Menu>
           </Header>
@@ -265,9 +282,7 @@ function App() {
               display: "flex",
             }}
           >
-            <div>
-              ©2022 | Developed by Raja 
-            </div>
+            <div>©2022 | Developed by Raja S</div>
           </Footer>
         </Layout>
       </Layout>
