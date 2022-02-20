@@ -41,7 +41,8 @@ const FFBChart = ({ data }) => {
         <AnnotationLineSubject
           x={50}
           y={50}
-          stroke="white"
+          stroke="red"
+          opacity={0.5}
           orientation="horizontal"
         />
         <Axis

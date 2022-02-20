@@ -143,7 +143,7 @@ function App() {
             <span className="logo">ACCTelemetry</span>
             <span className="sub">v1.0</span>
           </div>
-          <Divider>Connection</Divider>
+          <Divider style={{ margin: "32px 0" }}>Connection</Divider>
           <div className="connection-info">
             <div>
               <span style={{ marginRight: 4 }}>Server:</span>
@@ -162,21 +162,21 @@ function App() {
               )}
             </div>
           </div>
-          <Divider>Info</Divider>
+          <Divider style={{ margin: "32px 0" }}>Info</Divider>
           <div className="user-info">
             <div>User: {getRecentData(data, "playerNick")}</div>
             <div>Track: {getRecentData(data, "track")}</div>
             <div>Grip: {getRecentData(data, "trackGripStatus")}</div>
           </div>
-          <Divider>Damage Details</Divider>
+          <Divider style={{ margin: "32px 0" }}>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, "carModel")}</div>
             <CarChasis carDamage={carDamage} />
             <div>Total damage: {carDamage[4]}</div>
           </div>
-          <Divider>GForce meter</Divider>
+          <Divider style={{ margin: "32px 0" }}>GForce meter</Divider>
           <GforceChart accG={getRecentData(data, "accG")} />
-          {/* <Divider>Track</Divider>
+          {/* <Divider style={{margin: "32px 0"}}>Track</Divider>
           <Suzuka
             normalizedCarPosition={getRecentData(data, "normalizedCarPosition")}
           /> */}

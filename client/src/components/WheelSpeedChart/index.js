@@ -31,7 +31,7 @@ const ordinalScaleObj = {
 const ChartBackground = () => {
   return (
     <>
-      <rect x={0} y={0} width={"100%"} height={450} fill={"black"} />
+      <rect x={0} y={0} width={"100%"} height={350} fill={"black"} />
     </>
   );
 };
@@ -42,7 +42,7 @@ const WheelSpeedChart = ({ data }) => {
   return (
     <>
       <XYChart
-        height={450}
+        height={350}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 300] }}
       >
