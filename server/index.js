@@ -1,6 +1,10 @@
 const WebSocket = require("ws");
 const ACCNodeWrapper = require("acc-node-wrapper");
 const wrapper = new ACCNodeWrapper();
+const utilFunctions = require("./utils/functions");
+
+
+const { getCarDetails, getTrackGripStatus } = utilFunctions;
 
 /* Web Sockets */
 const startWSSServer = () => {
@@ -14,11 +18,11 @@ const startWSSServer = () => {
     });
 
     ws.on("message", (data) => {
-      if (JSON.parse(data).msg === "ready_to_receive") {
         console.log("UI connected and ready to receive");
         setInterval(() => {
           const { m_physics_result, m_graphics_result, m_static_result } =
             wrapper.getAllSharedMemory();
+          const carModel = m_static_result.carModel.join("");
           const result = {
             gas: m_physics_result.gas,
             brake: m_physics_result.brake,
@@ -28,7 +32,9 @@ const startWSSServer = () => {
             gear: m_physics_result.gear,
             rpm: m_physics_result.rpms,
             isEngineRunning: m_physics_result.rpms > 1000,
-            steerAngle: Math.round(400 * m_physics_result.steerAngle), //Make it dynamic for all cars
+            steerAngle: Math.round(
+              getCarDetails(carModel).maxSteering * m_physics_result.steerAngle
+            ), 
             ffb: Math.round(Math.abs(m_physics_result.finalFF * 100)),
             carDamage: m_physics_result.carDamage.map((val) => Math.round(val)),
             suspensionTravel: m_physics_result.suspensionTravel.map(
@@ -42,22 +48,18 @@ const startWSSServer = () => {
             ),
             time: m_graphics_result.iCurrentTime / 100,
             normalizedCarPosition: m_graphics_result.normalizedCarPosition,
-            trackGripStatus: m_graphics_result.trackGripStatus,
+            trackGripStatus: getTrackGripStatus(m_graphics_result.trackGripStatus),
             smVersion: m_static_result.smVersion.join(""),
             acVersion: m_static_result.acVersion.join(""),
-            carModel: m_static_result.carModel.join(""),
+            carModel: getCarDetails(carModel).name,
             track: m_static_result.track.join(""),
             playerName: m_static_result.playerName.join(""),
             playerSurname: m_static_result.playerSurname.join(""),
             playerNick: m_static_result.playerNick.join(""),
-            track: m_static_result.track,
             isMultiplayer: m_static_result.isOnline,
           };
           ws.send(JSON.stringify(result));
         }, 1000 / 20);
-      } else {
-        console.log("invalid message skip sending data");
-      }
     });
 
     ws.on("close", () => {
@@ -83,7 +85,7 @@ function exitHandler(options, exitCode) {
   if (exitCode || exitCode === 0) {
     wrapper.clearAllSharedMemory();
     console.log("Telemetry server stopped");
-  };
+  }
   if (options.exit) process.exit();
 }
 
