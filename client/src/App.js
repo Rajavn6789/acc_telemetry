@@ -228,7 +228,6 @@ function App() {
               zIndex: 1,
               width: "100%",
               padding: 0,
-              display: "flex",
             }}
           >
             <Menu
@@ -251,10 +250,10 @@ function App() {
               >
                 Advanced
               </Menu.Item>
+              
               <Menu.Item
                 key="github"
                 icon={<GithubOutlined />}
-                style={{ marginLeft: 'auto' }}
               >
                 <a
                   href="https://github.com/Rajavn6789/acc_telemetry"
