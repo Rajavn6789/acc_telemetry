@@ -20,7 +20,13 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 - Windows Machine to consume shared memory module.
 - ACC game running.
 
-### Running in local
+### Components
+- ACCTelemetry-server - CLI based application which reads the telemetry data from ACC shared memory.
+- ACCTelemetry- UI - UI that receives the data from server and displays the data via charts, visualisations.
+
+Visit [Racedepartment download](https://www.racedepartment.com/downloads/acc-telemetry.48871) to download the server and ui exe or follow the below steps to start in local
+
+### Start in local
 1. Clone the repo
 ```sh
 git clone https://github.com/Rajavn6789/acc_telemetry.git
@@ -40,6 +46,13 @@ npm install
 npm start
 ```
 Visit [http://localhost:3000](http://localhost:3000) to view the UI
+
+
+
+### Troubleshooting
+- If Server is showing offline, reload the browser.
+- If ACC Telemetry is showing offline, turn on the engine.
+Send your suggestions/feedbacks/bugs to rajavn6789@gmail.com
 
 ### References 
 - [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper)
