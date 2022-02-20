@@ -140,13 +140,13 @@ function App() {
           }}
         >
           <div className="logo-container">
-            <span className="logo">ACCRAT</span>
-            <span className="sub">Realtime Analytics Tool v1.0</span>
+            <span className="logo">ACCTelemetry</span>
+            <span className="sub">v1.0</span>
           </div>
           <Divider>Connection</Divider>
           <div className="connection-info">
             <div>
-              <span style={{ marginRight: 4 }}>Server Status:</span>
+              <span style={{ marginRight: 4 }}>Server:</span>
               {connStatus === "online" ? (
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
               ) : (

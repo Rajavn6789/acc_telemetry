@@ -10,7 +10,7 @@ const startWSSServer = () => {
 
   wss.on("connection", (ws) => {
     ws.on("open", () => {
-      console.log("websocket open");
+      // console.log("websocket open");
     });
 
     ws.on("message", (data) => {
@@ -61,13 +61,13 @@ const startWSSServer = () => {
     });
 
     ws.on("close", () => {
-      console.log("websocket disconnected");
+      // console.log("websocket disconnected");
       ws.close();
       wrapper.clearAllSharedMemory();
     });
 
     ws.on("error", () => {
-      console.error("websocket error");
+      // console.error("websocket error");
       ws.close();
       wrapper.clearAllSharedMemory();
     });

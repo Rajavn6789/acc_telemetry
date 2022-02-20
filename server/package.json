@@ -1,15 +1,15 @@
 {
-  "name": "accrat-server",
+  "name": "acc-telemetry-server",
   "version": "1.0.0",
   "private": true,
-  "author": "Raja S <rajavn6789@gmail.com>",
-  "description": "ACCRAT realtime telemetry app",
+  "author": "Rajavenkateshwaran S <rajavn6789@gmail.com>",
+  "description": "Server that sends data ACC Telemetry tool",
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "package": "pkg index.js --targets node14-win-x64 -o accratserver"
+    "package": "pkg index.js --targets node14-win-x64 -o acctelemetryserver"
   },
   "dependencies": {
     "acc-node-wrapper": "github:Rajavn6789/acc-node-wrapper",

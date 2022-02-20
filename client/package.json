@@ -1,9 +1,9 @@
 {
-  "name": "accrat-client",
+  "name": "acc-telemetry",
   "version": "1.0.0",
   "private": true,
-  "author": "Raja S <rajavn6789@gmail.com>",
-  "description": "ACC RAT realtime telemetry app",
+  "author": "Rajavenkateshwaran S <rajavn6789@gmail.com>",
+  "description": "A simple telemetry tool for ACC",
   "homepage": "./",
   "main": "./public/electron.js",
   "scripts": {
@@ -11,8 +11,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron:start": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electronmon .\"",
-    "electron:package": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js"
+    "package": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -32,13 +31,9 @@
     "websocket": "^1.0.34"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0",
-    "cross-env": "^7.0.3",
     "electron": "^17.0.1",
     "electron-builder": "^22.14.13",
-    "electron-is-dev": "^2.0.0",
-    "electronmon": "^2.0.2",
-    "wait-on": "^6.0.1"
+    "electron-is-dev": "^2.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -61,8 +56,8 @@
     ]
   },
   "build": {
-    "appId": "accrat-client",
-    "productName": "accrat-client",
+    "appId": "acc-telemetry",
+    "productName": "ACCTelemetry",
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -74,6 +69,8 @@
       "target": "nsis"
     },
     "nsis": {
+      "artifactName": "ACCTelemetry-installer.${ext}",
+      "uninstallDisplayName": "ACCTelemetry",
       "deleteAppDataOnUninstall": true,
       "createDesktopShortcut": true
     }
