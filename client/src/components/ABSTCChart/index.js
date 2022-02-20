@@ -13,7 +13,7 @@ const tcAccessor = {
 };
 
 const ordinalScaleObj = {
-  domain: ["TC", "ABS"],
+  domain: ["ABS", "TC"],
   range: ["blue", "violet"],
 };
 
