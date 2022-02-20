@@ -7,7 +7,7 @@ const speedAccessor = {
   xAccessor: (d) => d.time,
 };
 
-const tickValues = [-1, 0, 1, 2, 3, 4, 5, 6];
+const tickValues = [0, 1, 2, 3, 4, 5, 6];
 
 const ordinalScaleObj = {
   domain: ["gear"],
@@ -20,7 +20,7 @@ const GEARChart = ({ data }) => {
       <XYChart
         height={200}
         xScale={{ type: "band" }}
-        yScale={{ type: "linear", domain: [-1, 6] }}
+        yScale={{ type: "linear", domain: [0, 6] }}
       >
         <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
         <Grid
@@ -37,7 +37,7 @@ const GEARChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-                {formattedValue}
+              {Math.round(formattedValue)}
               </text>
             </g>
           )}
@@ -48,7 +48,7 @@ const GEARChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-                {formattedValue}
+              {Math.round(formattedValue)}
               </text>
             </g>
           )}
