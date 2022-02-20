@@ -1,7 +1,6 @@
 ## ACC Telemetry
 ### Introduction
 A realtime telemetry app for [Assetto Corsa Compitizione](https://www.assettocorsa.it/competizione/).
-
 With ***acc-telemetry*** you can visualise the realtime telemetry data from the Assetto Corsa Compitizione in the form of graphs. Below are the supported graphs as of v1.0
 
 - Force Feedback Graph -  to monitor and fix FFB clipping.
@@ -17,8 +16,8 @@ With ***acc-telemetry*** you can visualise the realtime telemetry data from the 
 
 
 ### Requirements
-- You need a Windows Machine because the shared memory module only works on Windows.
-- You need a ACC game running.
+- Windows Machine to consume shared memory module.
+- ACC game running.
 
 ### Running in local
 1. Clone the repo
@@ -40,3 +39,9 @@ npm install
 npm start
 ```
 Visit [http://localhost:3000](http://localhost:3000) to view the UI
+
+### References 
+- [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper)
+
+### License
+MIT
