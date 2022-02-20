@@ -10,7 +10,7 @@ export const getRandomTwoValues = (value1, value2) => {
 
 export const generateRangeArr = (start, end, interval) => {
   const ticks = (end - start) / interval;
-  let rangerArr = Array(ticks + 1).fill(0);
+  let rangerArr = Array(Math.round(ticks) + 1).fill(0);
   rangerArr = rangerArr.map((val, index) => {
     return start + index * interval;
   });

@@ -21,7 +21,7 @@ const ChartBackground = () => {
   const { margin, innerHeight, innerWidth } = useContext(DataContext);
   return (
     <>
-      <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
+      <rect x={0} y={0} width={"100%"} height={175} fill={"black"} />
     </>
   );
 };
@@ -32,7 +32,7 @@ const ABSTCChart = ({ data }) => {
   return (
     <>
       <XYChart
-        height={150}
+        height={175}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 1] }}
       >

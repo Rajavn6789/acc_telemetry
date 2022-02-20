@@ -65,6 +65,7 @@ function App() {
   const [data, setData] = useState(false);
   const [connStatus, setConnStatus] = useState("offline");
   const [accStatus, setAccStatus] = useState("offline");
+  const [currView, setCurrView] = useState("basic");
 
   const webSocket = useRef(null);
 
@@ -122,6 +123,40 @@ function App() {
     }
     return output;
   };
+
+  const handleViewChange = (key) => {
+    setCurrView(key);
+  };
+
+
+  const renderCharts = () =>{
+    let element;
+    if(currView === "basic"){
+      element = (
+        <>
+        <FFBChart data={data} />
+        <GasBrakeChart data={data} />
+        <ABSTCChart data={data} />
+        <SteerAngleChart data={data} />
+        <SpeedChart data={data} />
+        <RPMChart data={data} />
+        <GEARChart data={data} />
+      </>
+      );
+    } else if(currView === "advanced") {
+      element = (
+        <>
+        <SpeedChart data={data} />
+        <SuspensionTravelChart data={data} />
+        <WheelSpeedChart data={data} />
+        <GasBrakeChart data={data} />
+        </>
+      );
+    } else {
+      element = null;
+    }
+    return element;
+  }
 
   return (
     <>
@@ -182,46 +217,40 @@ function App() {
           /> */}
         </Sider>
         <Layout style={{ marginLeft: 300 }}>
-          {/* <Header
+          <Header
             style={{ position: "fixed", zIndex: 1, width: "100%", padding: 0 }}
           >
             <Menu
               theme="dark"
               style={{ background: "#292c30" }}
               mode="horizontal"
-              defaultSelectedKeys={["basic"]}
+              defaultSelectedKeys={[currView]}
             >
-              <Menu.Item key="basic" icon={<PieChartOutlined />}>
-                Standard
+              <Menu.Item
+                key="basic"
+                onClick={({key}) => handleViewChange(key)}
+                icon={<PieChartOutlined />}
+              >
+                Basic
               </Menu.Item>
-              <Menu.Item key="wheel" icon={<DesktopOutlined />}>
-                Wheel
-              </Menu.Item>
-              <Menu.Item key="suspension" icon={<DesktopOutlined />}>
-                Suspension
-              </Menu.Item>
-              <Menu.Item key="brakes" icon={<DesktopOutlined />}>
-                Brakes
+              <Menu.Item
+                key="advanced"
+                onClick={({key}) => handleViewChange(key)}
+                icon={<DesktopOutlined />}
+              >
+                Advanced
               </Menu.Item>
             </Menu>
-          </Header> */}
+          </Header>
           <Content
-            style={
-              {
-                /* marginTop: 50 */
-              }
-            }
+            style={{
+              marginTop: 50,
+              minHeight: "calc(100vh)",
+              background: "black"
+            }}
           >
             <div>
-              <FFBChart data={data} />
-              <GasBrakeChart data={data} />
-              <ABSTCChart data={data} />
-              <SuspensionTravelChart data={data} />
-              <WheelSpeedChart data={data} />
-              <SteerAngleChart data={data} />
-              <SpeedChart data={data} />
-              <RPMChart data={data} />
-              <GEARChart data={data} />
+              {renderCharts()}
             </div>
           </Content>
           <Footer
