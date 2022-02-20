@@ -1,8 +1,10 @@
 ## ACC Telemetry
 ### Introduction
-A realtime telemetry app for [Assetto Corsa Compitizione](https://www.assettocorsa.it/competizione/).
-With ***acc-telemetry*** you can visualise the realtime telemetry data from the Assetto Corsa Compitizione in the form of graphs. Below are the supported graphs as of v1.0
+ACC Telemetry helps to visualizes the realtime [Assetto Corsa Compitizione](https://www.assettocorsa.it/competizione/) HUD data via graphs. It includes all the items in the ACC HUD along with suspension travel, wheel speed, Damage indicator and Gforce indicator.
 
+This tool doesn't persist data for offline analysis and all the data you see is realtime.
+
+#### Graphs
 - Force Feedback Graph -  to monitor and fix FFB clipping.
 - Throttle-Brake Graph - to monitor throttle brake overlapping.
 - ABS-TC Graph -  to understand when and how long ABS or TC is getting triggered.
@@ -13,7 +15,6 @@ With ***acc-telemetry*** you can visualise the realtime telemetry data from the 
 - WheelSpeed Graph - to monitor rear wheel speeds and helps to adjust differential preloads
 - Damage Indicator - to view damage on front, rear, left and right
 - GForce meter - to view gforce transition during braking, acclerating and while turning left or right.
-
 
 ### Requirements
 - Windows Machine to consume shared memory module.
