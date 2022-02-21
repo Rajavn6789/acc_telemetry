@@ -20,6 +20,11 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 - Windows Machine to consume shared memory module.
 - ACC game running.
 
+
+### Architecture
+![](https://github.com/Rajavn6789/adruino-rpm-rev-lights/blob/main/client/public/architecture.png)
+
+
 ### Components
 - ACCTelemetry-server - CLI based application which reads the telemetry data from ACC shared memory.
 - ACCTelemetry- UI - UI that receives the data from server and displays the data via charts, visualisations.
@@ -31,7 +36,7 @@ Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48
 ```sh
 git clone https://github.com/Rajavn6789/acc_telemetry.git
 ```
-> Server would start at port 8080
+
 2. Install the dependencies and start telemetry server
 ```sh
 cd server
@@ -48,11 +53,11 @@ npm start
 Visit [http://localhost:3000](http://localhost:3000) to view the UI
 
 
-
 ### Troubleshooting
 - If Server is showing offline, reload the browser.
 - If ACC Telemetry is showing offline, turn on the engine.
-Send your suggestions/feedbacks/bugs to rajavn6789@gmail.com
+
+If something not working as expected or want to provide feedback feel free to use the issue section of the repo
 
 ### References 
 - [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper)
