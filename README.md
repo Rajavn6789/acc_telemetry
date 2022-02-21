@@ -29,9 +29,13 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 - ACCTelemetry-server - CLI based application which reads the telemetry data from ACC shared memory.
 - ACCTelemetry- UI - UI that receives the data from server and displays the data via charts, visualisations.
 
-Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48871) to download the server and ui exe or follow the below steps to start in local
+### Running the App
+There are two options
 
-### Start in local
+#### a) Download from racedepartment
+Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48871) to download the server and ui exe
+
+#### b) Start in local
 1. Clone the repo
 ```sh
 git clone https://github.com/Rajavn6789/acc_telemetry.git
