@@ -16,13 +16,18 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 - Damage Indicator - to view damage on front, rear, left and right
 - GForce meter - to view gforce transition during braking, acclerating and while turning left or right.
 
+#### UI Screens
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/basic-graphs.png)
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/advanced-graphs.png)
+
+
 ### Requirements
 - Windows Machine to consume shared memory module.
 - ACC game running.
 
 
 ### Architecture
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/architecture.png)
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/architecture.png)
 
 
 ### Components
