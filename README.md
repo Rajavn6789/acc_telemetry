@@ -37,8 +37,13 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 ### Running the App
 There are two options
 
-#### a) Download from racedepartment
-Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48871) to download the server and ui exe
+#### a) Download and Run from racedepartment
+Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48871), download and extract the AccTelemetry.zip file
+
+1. Run the ACCTelemetry-server.exe
+2. Install ACCTelemetry-installer.exe
+3. Open ACC and start the engine.
+
 
 #### b) Start in local
 1. Clone the repo
