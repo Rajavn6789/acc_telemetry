@@ -22,7 +22,7 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 
 
 ### Architecture
-![](https://github.com/Rajavn6789/adruino-rpm-rev-lights/blob/main/client/public/architecture.png)
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/architecture.png)
 
 
 ### Components
