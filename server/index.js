@@ -36,6 +36,7 @@ const startWSSServer = () => {
           ),
           ffb: Math.round(Math.abs(m_physics_result.finalFF * 100)),
           carDamage: m_physics_result.carDamage.map((val) => Math.round(val)),
+          suspensionDamage: m_physics_result.suspensionDamage,
           suspensionTravel: m_physics_result.suspensionTravel.map(
             (item) => item * 1000
           ),

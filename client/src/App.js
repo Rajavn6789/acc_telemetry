@@ -45,6 +45,7 @@ const loadDefaultValues = () => {
       roadTemp: 0,
       accG: [0, 0, 0],
       carDamage: [0, 0, 0, 0, 0],
+      suspensionDamage: [0, 0, 0, 0],
       suspensionTravel: [0, 0, 0, 0],
       wheelAngularSpeed: [0, 0],
       trackGripStatus: "-",
@@ -114,6 +115,15 @@ function App() {
   } else {
     carDamage = [0, 0, 0, 0, 0];
   }
+
+
+    // Car Damage
+    let suspensionDamage;
+    if (data && data.length > 1) {
+      suspensionDamage = data[data.length - 1].suspensionDamage;
+    } else {
+      suspensionDamage = [0, 0, 0, 0];
+    }
 
   const getRecentData = (data, key, defaultVal = 0) => {
     let output;
@@ -206,7 +216,7 @@ function App() {
           <Divider style={{ margin: "24px 0" }}>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, "carModel")}</div>
-            <CarChasis carDamage={carDamage} />
+            <CarChasis carDamage={carDamage} suspensionDamage={suspensionDamage}/>
             <div>Total damage: {carDamage[4]}</div>
           </div>
           <Divider style={{ margin: "24px 0" }}>GForce meter</Divider>
@@ -246,15 +256,12 @@ function App() {
               <Menu.Item
                 key="advanced"
                 onClick={({ key }) => handleViewChange(key)}
-                icon={<BarChartOutlined  />}
+                icon={<BarChartOutlined />}
               >
                 Advanced
               </Menu.Item>
-              
-              <Menu.Item
-                key="github"
-                icon={<GithubOutlined />}
-              >
+
+              <Menu.Item key="github" icon={<GithubOutlined />}>
                 <a
                   href="https://github.com/Rajavn6789/acc_telemetry"
                   target="_blank"
