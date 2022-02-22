@@ -46,6 +46,7 @@ const startWSSServer = () => {
           accG: m_physics_result.accG.map(
             (val) => Math.floor((val + Number.EPSILON) * 100) / 100
           ),
+          tyreCoreTemp: m_physics_result.TyreCoreTemp.map((val) => Math.round(val)),
           time: m_graphics_result.iCurrentTime / 100,
           normalizedCarPosition: m_graphics_result.normalizedCarPosition,
           trackGripStatus: getTrackGripStatus(

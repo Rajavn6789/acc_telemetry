@@ -1,8 +1,9 @@
 import React, { memo } from "react";
 
-const CarChasis = ({ carDamage, suspensionDamage }) => {
+const CarChasis = ({ carDamage, suspensionDamage, tyreCoreTemp }) => {
   const [front, rear, left, right] = carDamage;
   const [sFL, sFR, sRL, sRR] = suspensionDamage;
+  const [tTFL, tTFR, tTRL, tTRR] = tyreCoreTemp;
 
   const low = 1;
   const medium = 20;
@@ -111,7 +112,7 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                   y="-89.097"
                   width="7.6852"
                   height="10.94"
-                  fill={sFL ? "#9f0000": "#010101"}
+                  fill={sFL ? "#9f0000" : "#010101"}
                   stroke-width=".2129"
                 />
                 <g transform="translate(-1.6852 .57274)">
@@ -162,6 +163,18 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                     />
                   </g>
                 </g>
+                <text
+                  x="-75"
+                  y="86.838823"
+                  fill="#ffffff"
+                  fontSize="9"
+                  letterSpacing={0.5}
+                  fontFamily="calibri"
+                >
+                  <tspan x="-75" y="86.838823" fontSize="9">
+                    {tTFL}°
+                  </tspan>
+                </text>
               </g>
               <g transform="rotate(180 -9.1541 83.319)">
                 <rect
@@ -171,7 +184,7 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                   y="-89.097"
                   width="7.6852"
                   height="10.94"
-                  fill={sFR ? "#9f0000": "#010101"}
+                  fill={sFR ? "#9f0000" : "#010101"}
                   stroke-width=".2129"
                 />
                 <g transform="translate(-1.6852 .57274)">
@@ -222,6 +235,19 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                     />
                   </g>
                 </g>
+                <text
+                  x="62"
+                  y="-83"
+                  fill="#ffffff"
+                  fontSize="9"
+                  letterSpacing={0.5}
+                  fontFamily="calibri"
+                  transform="scale(-1.0196642,-0.98071502)"
+                >
+                  <tspan x="62" y="-83" fontSize="9">
+                    {tTFR}°
+                  </tspan>
+                </text>
               </g>
               <g transform="rotate(180 -9.1416 141.27)">
                 <rect
@@ -231,7 +257,7 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                   y="-89.097"
                   width="7.6852"
                   height="10.94"
-                  fill={sRR ? "#9f0000": "#010101"}
+                  fill={sRR ? "#9f0000" : "#010101"}
                   stroke-width=".2129"
                 />
                 <g transform="translate(-1.6852 .57274)">
@@ -282,6 +308,19 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                     />
                   </g>
                 </g>
+                <text
+                  x="62"
+                  y="-83"
+                  fill="#ffffff"
+                  fontSize="9"
+                  letterSpacing={0.5}
+                  fontFamily="calibri"
+                  transform="scale(-1.0196642,-0.98071502)"
+                >
+                  <tspan x="62" y="-83" fontSize="9">
+                    {tTRR}°
+                  </tspan>
+                </text>
               </g>
               <g transform="translate(35.292 115.48)">
                 <rect
@@ -291,7 +330,7 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                   y="-89.097"
                   width="7.6852"
                   height="10.94"
-                  fill={sRL ? "#9f0000": "#010101"}
+                  fill={sRL ? "#9f0000" : "#010101"}
                   stroke-width=".2129"
                 />
                 <g transform="translate(-1.6852 .57274)">
@@ -342,6 +381,18 @@ const CarChasis = ({ carDamage, suspensionDamage }) => {
                     />
                   </g>
                 </g>
+                <text
+                  x="-75"
+                  y="86.838823"
+                  fill="#ffffff"
+                  fontSize="9"
+                  letterSpacing={0.5}
+                  fontFamily="calibri"
+                >
+                  <tspan x="-75" y="86.838823" fontSize="9">
+                    {tTRL}°
+                  </tspan>
+                </text>
               </g>
             </g>
           </g>

@@ -44,6 +44,7 @@ const loadDefaultValues = () => {
       airTemp: 0,
       roadTemp: 0,
       accG: [0, 0, 0],
+      tyreCoreTemp: [0, 0, 0, 0],
       carDamage: [0, 0, 0, 0, 0],
       suspensionDamage: [0, 0, 0, 0],
       suspensionTravel: [0, 0, 0, 0],
@@ -116,13 +117,21 @@ function App() {
     carDamage = [0, 0, 0, 0, 0];
   }
 
+  // Car Damage
+  let suspensionDamage;
+  if (data && data.length > 1) {
+    suspensionDamage = data[data.length - 1].suspensionDamage;
+  } else {
+    suspensionDamage = [0, 0, 0, 0];
+  }
+
 
     // Car Damage
-    let suspensionDamage;
+    let tyreCoreTemp;
     if (data && data.length > 1) {
-      suspensionDamage = data[data.length - 1].suspensionDamage;
+      tyreCoreTemp = data[data.length - 1].tyreCoreTemp;
     } else {
-      suspensionDamage = [0, 0, 0, 0];
+      tyreCoreTemp = [0, 0, 0, 0];
     }
 
   const getRecentData = (data, key, defaultVal = 0) => {
@@ -216,7 +225,11 @@ function App() {
           <Divider style={{ margin: "24px 0" }}>Damage Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, "carModel")}</div>
-            <CarChasis carDamage={carDamage} suspensionDamage={suspensionDamage}/>
+            <CarChasis
+              carDamage={carDamage}
+              suspensionDamage={suspensionDamage}
+              tyreCoreTemp={tyreCoreTemp}
+            />
             <div>Total damage: {carDamage[4]}</div>
           </div>
           <Divider style={{ margin: "24px 0" }}>GForce meter</Divider>
