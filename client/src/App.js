@@ -66,6 +66,7 @@ const loadDefaultValues = () => {
 
 function App() {
   const [data, setData] = useState(false);
+  const [recentData, setRecentData] = useState(false);
   const [connStatus, setConnStatus] = useState("offline");
   const [accStatus, setAccStatus] = useState("offline");
   const [currView, setCurrView] = useState("basic");
@@ -91,6 +92,7 @@ function App() {
       const telemetryData = JSON.parse(message.data);
       if (telemetryData.isEngineRunning) {
         setAccStatus("online");
+        setRecentData(telemetryData);
         setData((oldArray) => {
           let clonedArr = [...oldArray];
           if (clonedArr.length > maxItems) {
@@ -109,30 +111,11 @@ function App() {
     return () => webSocket.current.close();
   }, []);
 
-  // Car Damage
-  let carDamage;
-  if (data && data.length > 1) {
-    carDamage = data[data.length - 1].carDamage;
-  } else {
-    carDamage = [0, 0, 0, 0, 0];
-  }
 
   // Car Damage
-  let suspensionDamage;
-  if (data && data.length > 1) {
-    suspensionDamage = data[data.length - 1].suspensionDamage;
-  } else {
-    suspensionDamage = [0, 0, 0, 0];
-  }
-
-
-    // Car Damage
-    let tyreCoreTemp;
-    if (data && data.length > 1) {
-      tyreCoreTemp = data[data.length - 1].tyreCoreTemp;
-    } else {
-      tyreCoreTemp = [0, 0, 0, 0];
-    }
+  const carDamage = recentData.carDamage || [0, 0, 0, 0, 0];
+  const suspensionDamage = recentData.suspensionDamage || [0, 0, 0, 0];
+  const tyreCoreTemp = recentData.tyreCoreTemp || [0, 0, 0, 0];
 
   const getRecentData = (data, key, defaultVal = 0) => {
     let output;
