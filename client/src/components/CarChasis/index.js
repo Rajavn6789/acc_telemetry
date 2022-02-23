@@ -15,7 +15,7 @@ const CarChasis = ({ carDamage, suspensionDamage, tyreCoreTemp }) => {
       color = "#9f0000";
     } else if (damage > medium && damage < hard) {
       color = "orange";
-    } else if (damage > low && damage <= medium) {
+    } else if (damage >= low && damage <= medium) {
       color = "#8ddb00";
     } else {
       color = "black";
@@ -24,7 +24,7 @@ const CarChasis = ({ carDamage, suspensionDamage, tyreCoreTemp }) => {
   };
 
   const tyreColor = "#131313";
-  const tyreTreadColor = "#242424";
+  const tyreTreadColor = "#4a4a4a";
 
   return (
     <svg version="1.1" viewBox="0 0 250 250">

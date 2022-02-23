@@ -205,7 +205,7 @@ function App() {
             <div>Track: {getRecentData(data, "track")}</div>
             <div>Grip: {getRecentData(data, "trackGripStatus")}</div>
           </div>
-          <Divider style={{ margin: "24px 0" }}>Damage Details</Divider>
+          <Divider style={{ margin: "24px 0" }}>Car Details</Divider>
           <div className="damage-indicator">
             <div>Car: {getRecentData(data, "carModel")}</div>
             <CarChasis
