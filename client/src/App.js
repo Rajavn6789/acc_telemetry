@@ -149,26 +149,26 @@ function App() {
     } else if (currView === "suspension") {
       element = (
         <>
-          <SpeedChart data={data} />
-          <SuspensionTravelChart data={data} />
-          <GasBrakeChart data={data} />
+          <SpeedChart data={data} height={400} />
+          <SuspensionTravelChart data={data} height={500} />
+          <GasBrakeChart data={data} height={400} />
         </>
       );
     } else if (currView === "wheel") {
       element = (
         <>
-          <SpeedChart data={data} />
-          <WheelSpeedChart data={data} />
-          <GasBrakeChart data={data} />
+          <SpeedChart data={data} height={400}/>
+          <WheelSpeedChart data={data} height={500}/>
+          <GasBrakeChart data={data} height={400}/>
         </>
       );
     }
     else if (currView === "turbo") {
       element = (
         <>
-          <SpeedChart data={data} />
-          <RPMChart data={data} height={500} />
+          <SpeedChart data={data} height={400} />
           <TurboBoostChart data={data} height={500} />
+          <RPMChart data={data} height={400} />
         </>
       );
     }

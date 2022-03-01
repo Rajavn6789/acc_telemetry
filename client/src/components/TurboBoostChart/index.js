@@ -15,7 +15,7 @@ const ordinalScaleObj = {
 
 const tickValues = generateRangeArr(0, 2000, 100);
 
-const TurboBoostChart = ({ data, height }) => {
+const TurboBoostChart = ({ data, height = 400 }) => {
   return (
     <>
       <XYChart

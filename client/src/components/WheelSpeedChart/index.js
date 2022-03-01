@@ -38,7 +38,7 @@ const ChartBackground = ({ height }) => {
 
 const tickValues = generateRangeArr(0, 300, 20);
 
-const WheelSpeedChart = ({ data, height }) => {
+const WheelSpeedChart = ({ data, height = 400 }) => {
   return (
     <>
       <XYChart
