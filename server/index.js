@@ -30,6 +30,7 @@ const startWSSServer = () => {
           abs: m_physics_result.abs,
           gear: m_physics_result.gear,
           rpm: m_physics_result.rpms,
+          turboBoost:  Math.round(m_physics_result.turboBoost * 1000),
           isEngineRunning: m_physics_result.rpms > 1000,
           steerAngle: Math.round(
             getCarDetails(carModel).maxSteering * m_physics_result.steerAngle

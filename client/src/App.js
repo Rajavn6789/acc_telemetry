@@ -5,6 +5,7 @@ import GasBrakeChart from "./components/GasBrakeChart";
 import SpeedChart from "./components/SpeedChart";
 import ABSTCChart from "./components/ABSTCChart";
 import RPMChart from "./components/RPMChart";
+import TurboBoostChart from "./components/TurboBoostChart";
 import GEARChart from "./components/GEARChart";
 import FFBChart from "./components/FFBChart";
 import SteerAngleChart from "./components/SteerAngleChart";
@@ -39,6 +40,7 @@ const loadDefaultValues = () => {
       abs: 0,
       gear: 0,
       rpm: 0,
+      turboBoost: 0,
       steerAngle: 0,
       ffb: 0,
       airTemp: 0,
@@ -111,7 +113,6 @@ function App() {
     return () => webSocket.current.close();
   }, []);
 
-
   // Car Damage
   const carDamage = recentData.carDamage || [0, 0, 0, 0, 0];
   const suspensionDamage = recentData.suspensionDamage || [0, 0, 0, 0];
@@ -145,16 +146,33 @@ function App() {
           <GEARChart data={data} />
         </>
       );
-    } else if (currView === "advanced") {
+    } else if (currView === "suspension") {
       element = (
         <>
           <SpeedChart data={data} />
           <SuspensionTravelChart data={data} />
+          <GasBrakeChart data={data} />
+        </>
+      );
+    } else if (currView === "wheel") {
+      element = (
+        <>
+          <SpeedChart data={data} />
           <WheelSpeedChart data={data} />
           <GasBrakeChart data={data} />
         </>
       );
-    } else {
+    }
+    else if (currView === "turbo") {
+      element = (
+        <>
+          <SpeedChart data={data} />
+          <RPMChart data={data} height={500} />
+          <TurboBoostChart data={data} height={500} />
+        </>
+      );
+    }
+    else {
       element = null;
     }
     return element;
@@ -250,13 +268,26 @@ function App() {
                 Basic
               </Menu.Item>
               <Menu.Item
-                key="advanced"
+                key="suspension"
                 onClick={({ key }) => handleViewChange(key)}
                 icon={<BarChartOutlined />}
               >
-                Advanced
+                Suspension
               </Menu.Item>
-
+              <Menu.Item
+                key="wheel"
+                onClick={({ key }) => handleViewChange(key)}
+                icon={<BarChartOutlined />}
+              >
+                Wheel
+              </Menu.Item>
+              <Menu.Item
+                key="turbo"
+                onClick={({ key }) => handleViewChange(key)}
+                icon={<BarChartOutlined />}
+              >
+                Turbo
+              </Menu.Item>
               <Menu.Item key="github" icon={<GithubOutlined />}>
                 <a
                   href="https://github.com/Rajavn6789/acc_telemetry"
