@@ -32,7 +32,7 @@ const carDetails = {
     maxSteering: 320,
   },
   bmw_m4_gt3: {
-    name: "Mercedes AMG GT3 Evo 2020",
+    name: "BMW M4 vGT3 2021 ",
     maxSteering: 540,
   }
 };
