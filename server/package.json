@@ -9,6 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "start:debug": "cross-env DEBUG_MODE=1 nodemon index.js",
     "package": "pkg index.js --targets node14-win-x64 -o ACCTelemetry-server"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "ws": "^8.4.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "pkg": "^5.5.2"
   }
 }

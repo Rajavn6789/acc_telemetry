@@ -46,7 +46,9 @@ const startWSSServer = () => {
           accG: m_physics_result.accG.map(
             (val) => Math.floor((val + Number.EPSILON) * 100) / 100
           ),
-          tyreCoreTemp: m_physics_result.TyreCoreTemp.map((val) => Math.round(val)),
+          tyreCoreTemp: m_physics_result.TyreCoreTemp.map((val) =>
+            Math.round(val)
+          ),
           time: m_graphics_result.iCurrentTime / 100,
           normalizedCarPosition: m_graphics_result.normalizedCarPosition,
           trackGripStatus: getTrackGripStatus(
@@ -79,7 +81,16 @@ const startWSSServer = () => {
   });
 };
 
-startWSSServer();
+if (process.env.DEBUG_MODE == 1) {
+  console.log("debug mode", process.env.DEBUG_MODE);
+  setInterval(() => {
+    const { m_physics_result, m_graphics_result, m_static_result } =
+      wrapper.getAllSharedMemory();
+    console.log("turboBoost", Math.round(m_physics_result.turboBoost * 1000));
+  }, 1000 / 20);
+} else {
+  startWSSServer();
+}
 
 process.stdin.resume(); //so the program will not close instantly
 
