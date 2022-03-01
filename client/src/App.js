@@ -13,6 +13,9 @@ import SuspensionTravelChart from "./components/SuspensionTravelChart";
 import WheelSpeedChart from "./components/WheelSpeedChart";
 import GforceChart from "./components/GforceChart";
 import Suzuka from "./components/tracks/Suzuka";
+import SuspensionIcon from "./assets/icons/suspension";
+import WheelIcon from "./assets/icons/wheel";
+import TurboIcon from "./assets/icons/turbo";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
 
@@ -157,13 +160,12 @@ function App() {
     } else if (currView === "wheel") {
       element = (
         <>
-          <SpeedChart data={data} height={400}/>
-          <WheelSpeedChart data={data} height={500}/>
-          <GasBrakeChart data={data} height={400}/>
+          <SpeedChart data={data} height={400} />
+          <WheelSpeedChart data={data} height={500} />
+          <GasBrakeChart data={data} height={400} />
         </>
       );
-    }
-    else if (currView === "turbo") {
+    } else if (currView === "turbo") {
       element = (
         <>
           <SpeedChart data={data} height={400} />
@@ -171,8 +173,7 @@ function App() {
           <RPMChart data={data} height={400} />
         </>
       );
-    }
-    else {
+    } else {
       element = null;
     }
     return element;
@@ -270,21 +271,21 @@ function App() {
               <Menu.Item
                 key="suspension"
                 onClick={({ key }) => handleViewChange(key)}
-                icon={<BarChartOutlined />}
+                icon={<SuspensionIcon />}
               >
                 Suspension
               </Menu.Item>
               <Menu.Item
                 key="wheel"
                 onClick={({ key }) => handleViewChange(key)}
-                icon={<BarChartOutlined />}
+                icon={<WheelIcon />}
               >
                 Wheel
               </Menu.Item>
               <Menu.Item
                 key="turbo"
                 onClick={({ key }) => handleViewChange(key)}
-                icon={<BarChartOutlined />}
+                icon={<TurboIcon />}
               >
                 Turbo
               </Menu.Item>
