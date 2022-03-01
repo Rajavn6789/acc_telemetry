@@ -14,15 +14,15 @@ const ordinalScaleObj = {
   range: ["yellow"],
 };
 
-const GEARChart = ({ data }) => {
+const GEARChart = ({ data, height = 200 }) => {
   return (
     <>
       <XYChart
-        height={200}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 6] }}
       >
-        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
+        <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
         <Grid
           rows={true}
           columns={false}
@@ -37,7 +37,7 @@ const GEARChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-              {Math.round(formattedValue)}
+                {Math.round(formattedValue)}
               </text>
             </g>
           )}
@@ -48,7 +48,7 @@ const GEARChart = ({ data }) => {
           tickComponent={({ formattedValue, ...tickProps }) => (
             <g>
               <text {...tickProps} fill={"white"} opacity={0.5}>
-              {Math.round(formattedValue)}
+                {Math.round(formattedValue)}
               </text>
             </g>
           )}

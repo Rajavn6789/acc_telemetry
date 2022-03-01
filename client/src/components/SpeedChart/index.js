@@ -15,15 +15,15 @@ const ordinalScaleObj = {
   range: ["green"],
 };
 
-const SpeedChart = ({ data }) => {
+const SpeedChart = ({ data, height = 250 }) => {
   return (
     <>
       <XYChart
-        height={250}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 300] }}
       >
-        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
+        <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
         <Grid
           rows={true}
           columns={false}

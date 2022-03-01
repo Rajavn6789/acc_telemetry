@@ -15,15 +15,15 @@ const ordinalScaleObj = {
 
 const tickValues = generateRangeArr(0, 9250, 1000);
 
-const RPMChart = ({ data }) => {
+const RPMChart = ({ data, height = 400 }) => {
   return (
     <>
       <XYChart
-        height={400}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 9250] }}
       >
-        <rect x={0} y={0} width={"100%"} height={400} fill={"black"} />
+        <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
         <Grid
           rows={true}
           columns={false}

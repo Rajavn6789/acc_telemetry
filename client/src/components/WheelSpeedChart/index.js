@@ -28,25 +28,25 @@ const ordinalScaleObj = {
   range: ["", "violet", "#1babbf"],
 };
 
-const ChartBackground = () => {
+const ChartBackground = ({ height }) => {
   return (
     <>
-      <rect x={0} y={0} width={"100%"} height={450} fill={"black"} />
+      <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
     </>
   );
 };
 
 const tickValues = generateRangeArr(0, 300, 20);
 
-const WheelSpeedChart = ({ data }) => {
+const WheelSpeedChart = ({ data, height }) => {
   return (
     <>
       <XYChart
-        height={450}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 300] }}
       >
-        <ChartBackground />
+        <ChartBackground height={height} />
         <Grid
           rows={true}
           columns={false}
@@ -79,8 +79,18 @@ const WheelSpeedChart = ({ data }) => {
         ></Axis>
         {/* <LineSeries dataKey="fl" stroke="orange" data={data} {...FLAccessor} />
         <LineSeries dataKey="fr" stroke="yellow" data={data} {...FRAccessor} /> */}
-        <LineSeries dataKey="rlws" stroke="violet" data={data} {...RLAccessor} />
-        <LineSeries dataKey="rrws" stroke="#1babbf"   data={data} {...RRAccessor} />
+        <LineSeries
+          dataKey="rlws"
+          stroke="violet"
+          data={data}
+          {...RLAccessor}
+        />
+        <LineSeries
+          dataKey="rrws"
+          stroke="#1babbf"
+          data={data}
+          {...RRAccessor}
+        />
       </XYChart>
       <ChartLegend scale={ordinalScaleObj} />
     </>

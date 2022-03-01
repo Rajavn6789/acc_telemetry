@@ -20,15 +20,15 @@ const ordinalScaleObj = {
 
 const tickValues = generateRangeArr(0, 1, 0.2);
 
-const GasBrakeChart = ({ data }) => {
+const GasBrakeChart = ({ data, height = 250 }) => {
   return (
     <>
       <XYChart
-        height={250}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 1] }}
       >
-        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
+        <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
         <Grid
           rows={true}
           columns={false}

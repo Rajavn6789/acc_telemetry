@@ -15,15 +15,15 @@ const ordinalScaleObj = {
   range: ["orange"],
 };
 
-const SteerAngleChart = ({ data }) => {
+const SteerAngleChart = ({ data, height = 300 }) => {
   return (
     <>
       <XYChart
-        height={300}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [-270, 270] }}
       >
-        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
+        <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
         <Grid
           rows={true}
           columns={false}

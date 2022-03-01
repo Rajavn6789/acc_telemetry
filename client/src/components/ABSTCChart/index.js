@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { LineSeries, Axis, XYChart, Grid, DataContext } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 
@@ -17,26 +17,25 @@ const ordinalScaleObj = {
   range: ["blue", "violet"],
 };
 
-const ChartBackground = () => {
-  const { margin, innerHeight, innerWidth } = useContext(DataContext);
+const ChartBackground = ({height}) => {
   return (
     <>
-      <rect x={0} y={0} width={"100%"} height={175} fill={"black"} />
+      <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
     </>
   );
 };
 
 const tickValues = [0, 1];
 
-const ABSTCChart = ({ data }) => {
+const ABSTCChart = ({ data, height = 175 }) => {
   return (
     <>
       <XYChart
-        height={175}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 1] }}
       >
-        <ChartBackground />
+        <ChartBackground height={height}/>
         <Grid
           rows={true}
           columns={false}

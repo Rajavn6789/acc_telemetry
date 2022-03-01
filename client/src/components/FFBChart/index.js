@@ -21,15 +21,15 @@ const ordinalScaleObj = {
   range: ["grey"],
 };
 
-const FFBChart = ({ data }) => {
+const FFBChart = ({ data, height = 200 }) => {
   return (
     <>
       <XYChart
-        height={200}
+        height={height}
         xScale={{ type: "band" }}
         yScale={{ type: "linear", domain: [0, 100], label: "time" }}
       >
-        <rect x={0} y={0} width={"100%"} height={300} fill={"black"} />
+        <rect x={0} y={0} width={"100%"} height={height} fill={"black"} />
         <Grid
           rows={true}
           columns={false}
