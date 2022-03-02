@@ -11,6 +11,7 @@ import FFBChart from "./components/FFBChart";
 import SteerAngleChart from "./components/SteerAngleChart";
 import SuspensionTravelChart from "./components/SuspensionTravelChart";
 import WheelSpeedChart from "./components/WheelSpeedChart";
+import WheelSpeedDiffChart from "./components/WheelSpeedDiffChart";
 import GforceChart from "./components/GforceChart";
 import Suzuka from "./components/tracks/Suzuka";
 import SuspensionIcon from "./assets/icons/suspension";
@@ -54,6 +55,7 @@ const loadDefaultValues = () => {
       suspensionDamage: [0, 0, 0, 0],
       suspensionTravel: [0, 0, 0, 0],
       wheelAngularSpeed: [0, 0],
+      wheelAngularSpeedDiff: 0,
       trackGripStatus: "-",
       rainIntensity: "-",
       rainIntensityIn10min: "-",
@@ -160,9 +162,10 @@ function App() {
     } else if (currView === "wheel") {
       element = (
         <>
-          <SpeedChart data={data} height={400} />
+          <SpeedChart data={data} height={250} />
           <WheelSpeedChart data={data} height={500} />
-          <GasBrakeChart data={data} height={400} />
+          <WheelSpeedDiffChart data={data} height={300} />
+          <GasBrakeChart data={data} height={250} />
         </>
       );
     } else if (currView === "turbo") {

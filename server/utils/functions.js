@@ -1,3 +1,8 @@
+const round = (num) => {
+  var m = Number((Math.abs(num) * 100).toPrecision(15));
+  return (Math.round(m) / 100) * Math.sign(num);
+};
+
 const carDetails = {
   amr_v8_vantage_gt3: {
     name: "Aston Martin V8 Vantage GT3 2019",
@@ -34,7 +39,7 @@ const carDetails = {
   bmw_m4_gt3: {
     name: "BMW M4 vGT3 2021 ",
     maxSteering: 540,
-  }
+  },
 };
 
 const gripStatus = {
@@ -44,8 +49,8 @@ const gripStatus = {
   ACC_GREASY: "Greasy",
   ACC_DAMP: "Damp",
   ACC_WET: "Wet",
-  ACC_FLOODED: "Flooded"
-}
+  ACC_FLOODED: "Flooded",
+};
 
 const getCarDetails = (key) => {
   let details;
@@ -65,9 +70,19 @@ const getTrackGripStatus = (key) => {
   if (gripStatus[key]) {
     status = gripStatus[key];
   } else {
-    status = "na"
+    status = "na";
   }
   return status;
 };
 
-module.exports = { getCarDetails, getTrackGripStatus };
+
+const getWheelAngularSpeedDiff = (wheelSpeed) => {
+  return round( wheelSpeed[3] - wheelSpeed[2]);
+};
+
+module.exports = {
+  round,
+  getCarDetails,
+  getTrackGripStatus,
+  getWheelAngularSpeedDiff,
+};

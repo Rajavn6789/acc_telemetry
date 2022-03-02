@@ -3,7 +3,8 @@ const ACCNodeWrapper = require("acc-node-wrapper");
 const wrapper = new ACCNodeWrapper();
 const utilFunctions = require("./utils/functions");
 
-const { getCarDetails, getTrackGripStatus } = utilFunctions;
+const { getCarDetails, getTrackGripStatus, getWheelAngularSpeedDiff } =
+  utilFunctions;
 
 /* Web Sockets */
 const startWSSServer = () => {
@@ -30,7 +31,7 @@ const startWSSServer = () => {
           abs: m_physics_result.abs,
           gear: m_physics_result.gear,
           rpm: m_physics_result.rpms,
-          turboBoost:  Math.round(m_physics_result.turboBoost * 1000),
+          turboBoost: Math.round(m_physics_result.turboBoost * 1000),
           isEngineRunning: m_physics_result.rpms > 1000,
           steerAngle: Math.round(
             getCarDetails(carModel).maxSteering * m_physics_result.steerAngle
@@ -44,6 +45,9 @@ const startWSSServer = () => {
           wheelAngularSpeed: m_physics_result.wheelAngularSpeed
             .map((item) => Math.abs(item))
             .slice(2, 4),
+          wheelAngularSpeedDiff: getWheelAngularSpeedDiff(
+            m_physics_result.wheelAngularSpeed
+          ),
           accG: m_physics_result.accG.map(
             (val) => Math.floor((val + Number.EPSILON) * 100) / 100
           ),
@@ -88,7 +92,7 @@ if (process.env.DEBUG_MODE == 1) {
     const { m_physics_result, m_graphics_result, m_static_result } =
       wrapper.getAllSharedMemory();
     console.log("turboBoost", Math.round(m_physics_result.turboBoost * 1000));
-  }, 1000 / 20);
+  }, 1000 / 2);
 } else {
   startWSSServer();
 }
