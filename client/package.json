@@ -69,7 +69,7 @@
       "target": "nsis"
     },
     "nsis": {
-      "artifactName": "ACCTelemetry-installer.${ext}",
+      "artifactName": "ACCTelemetry-installer-V${version}.${ext}",
       "uninstallDisplayName": "ACCTelemetry",
       "deleteAppDataOnUninstall": true,
       "createDesktopShortcut": true

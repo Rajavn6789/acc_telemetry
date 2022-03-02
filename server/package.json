@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "start:debug": "cross-env DEBUG_MODE=1 nodemon index.js",
-    "package": "pkg index.js --targets node14-win-x64 -o ACCTelemetry-server"
+    "package": "pkg index.js --targets node14-win-x64 -o ACCTelemetry-server-V1.0.0"
   },
   "dependencies": {
     "acc-node-wrapper": "github:Rajavn6789/acc-node-wrapper",
