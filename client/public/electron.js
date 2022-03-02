@@ -2,6 +2,7 @@
 const { app, BrowserWindow, protocol } = require("electron");
 const path = require("path");
 const url = require("url");
+const electron = require('electron');
 
 // Create the native browser window.
 function createWindow() {
@@ -11,6 +12,11 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
+  });
+
+  mainWindow.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    electron.shell.openExternal(url);
   });
 
   // In production, set the initial browser path to the local bundle generated
