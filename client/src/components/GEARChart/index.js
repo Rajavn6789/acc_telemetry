@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 
@@ -66,4 +66,4 @@ const GEARChart = ({ data, height = 200 }) => {
   );
 };
 
-export default GEARChart;
+export default memo(GEARChart);

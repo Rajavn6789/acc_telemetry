@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 import { generateRangeArr } from "../../utils/functions";
@@ -67,4 +67,4 @@ const SteerAngleChart = ({ data, height = 300 }) => {
   );
 };
 
-export default SteerAngleChart;
+export default memo(SteerAngleChart);

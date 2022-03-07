@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 import { generateRangeArr } from "../../utils/functions";
@@ -67,4 +67,4 @@ const TurboBoostChart = ({ data, height = 400 }) => {
   );
 };
 
-export default TurboBoostChart;
+export default memo(TurboBoostChart);

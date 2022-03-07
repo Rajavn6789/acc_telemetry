@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { LineSeries, Axis, XYChart, Grid } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 import { generateRangeArr } from "../../utils/functions";
@@ -72,4 +72,4 @@ const GasBrakeChart = ({ data, height = 250 }) => {
   );
 };
 
-export default GasBrakeChart;
+export default memo(GasBrakeChart);

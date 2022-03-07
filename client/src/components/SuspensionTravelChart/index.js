@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { LineSeries, Axis, XYChart, Grid, DataContext } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 import { generateRangeArr } from "../../utils/functions";
@@ -102,4 +102,4 @@ const SuspensionTravelChart = ({ data, height = 400 }) => {
   );
 };
 
-export default SuspensionTravelChart;
+export default memo(SuspensionTravelChart);

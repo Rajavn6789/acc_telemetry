@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { LineSeries, Axis, XYChart, Grid, DataContext } from "@visx/xychart";
 import ChartLegend from "../ChartLegend";
 
@@ -74,4 +74,4 @@ const ABSTCChart = ({ data, height = 175 }) => {
   );
 };
 
-export default ABSTCChart;
+export default memo(ABSTCChart);

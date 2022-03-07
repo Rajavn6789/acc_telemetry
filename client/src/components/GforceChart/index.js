@@ -1,12 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import { scaleLinear } from "@visx/scale";
 import { Group } from "@visx/group";
 import { Axis } from "@visx/axis";
 import { generateRangeArr } from "../../utils/functions";
 
-
 const min = -2.5;
-const max = 2.5; 
+const max = 2.5;
 
 const hTickValues = generateRangeArr(min, max, 1);
 const vTickValues = generateRangeArr(min, max, 1);
@@ -28,7 +27,7 @@ const verticalScale = scaleLinear({
 const GforceChart = ({ accG }) => {
   return (
     <div style={{ display: "flex", justifyContent: "center", padding: 8 }}>
-      <svg width={width + 50} height={height + 50} >
+      <svg width={width + 50} height={height + 50}>
         <circle
           fill={"whitesmoke"}
           cx={width / 2 + 20}
@@ -41,8 +40,8 @@ const GforceChart = ({ accG }) => {
           <Axis
             key={`axis-horizontal`}
             labelProps={{
-                display: "none",
-              }}
+              display: "none",
+            }}
             top={0}
             left={0}
             scale={horizontalScale}
@@ -82,8 +81,8 @@ const GforceChart = ({ accG }) => {
             r={circleRadius}
           />
         </Group>
-        <text  transform="translate(115,240)">A</text>
-        <text  transform="translate(115, 10)">B</text>
+        <text transform="translate(115,240)">A</text>
+        <text transform="translate(115, 10)">B</text>
         <text transform="translate(0,125)">L</text>
         <text transform="translate(230,125) ">R</text>
       </svg>
@@ -91,4 +90,4 @@ const GforceChart = ({ accG }) => {
   );
 };
 
-export default GforceChart;
+export default memo(GforceChart);

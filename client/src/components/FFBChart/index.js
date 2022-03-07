@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   LineSeries,
   Axis,
@@ -79,4 +79,4 @@ const FFBChart = ({ data, height = 200 }) => {
   );
 };
 
-export default FFBChart;
+export default memo(FFBChart);
