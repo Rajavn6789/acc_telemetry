@@ -13,7 +13,7 @@ const ordinalScaleObj = {
   range: ["green"],
 };
 
-const tickValues = generateRangeArr(0, 2000, 100);
+const tickValues = generateRangeArr(0, 2000, 500);
 
 const TurboBoostChart = ({ data, height = 400 }) => {
   return (

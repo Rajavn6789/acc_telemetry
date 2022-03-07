@@ -119,7 +119,6 @@ function App() {
     return () => webSocket.current.close();
   }, []);
 
-
   const getRecentData = (data, key, defaultVal = 0) => {
     let output;
     if (data && data.length > 0) {
@@ -155,26 +154,26 @@ function App() {
     } else if (currView === "suspension") {
       element = (
         <>
-          <SpeedChart data={data} height={400} />
-          <SuspensionTravelChart data={data} height={500} />
-          <GasBrakeChart data={data} height={400} />
+          <GasBrakeChart data={data} />
+          <SteerAngleChart data={data} />
+          <SuspensionTravelChart data={data} height={600} />
         </>
       );
     } else if (currView === "wheel") {
       element = (
         <>
-          <SpeedChart data={data} height={250} />
-          <WheelSpeedChart data={data} height={500} />
+          <GasBrakeChart data={data} />
+          <SteerAngleChart data={data} />
+          <WheelSpeedChart data={data} height={450} />
           <WheelSpeedDiffChart data={data} height={300} />
-          <GasBrakeChart data={data} height={250} />
         </>
       );
     } else if (currView === "turbo") {
       element = (
         <>
-          <SpeedChart data={data} height={400} />
-          <TurboBoostChart data={data} height={500} />
+          <GasBrakeChart data={data} />
           <RPMChart data={data} height={400} />
+          <TurboBoostChart data={data} height={500} />
         </>
       );
     } else {
@@ -183,9 +182,9 @@ function App() {
     return element;
   };
 
-    const carDamage = recentData.carDamage || [0, 0, 0, 0, 0];
-    const suspensionDamage = recentData.suspensionDamage || [0, 0, 0, 0];
-    const tyreCoreTemp = recentData.tyreCoreTemp || [0, 0, 0, 0];  
+  const carDamage = recentData.carDamage || [0, 0, 0, 0, 0];
+  const suspensionDamage = recentData.suspensionDamage || [0, 0, 0, 0];
+  const tyreCoreTemp = recentData.tyreCoreTemp || [0, 0, 0, 0];
 
   return (
     <>
@@ -233,7 +232,7 @@ function App() {
                 <CloseCircleTwoTone twoToneColor="red" />
               )}
             </div>
-            <div style={{marginTop: 8}}>
+            <div style={{ marginTop: 8 }}>
               <Button type="dashed" size="small" onClick={handleRefreshPage}>
                 Refresh
               </Button>

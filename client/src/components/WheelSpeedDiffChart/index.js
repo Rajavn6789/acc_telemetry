@@ -10,7 +10,7 @@ const speedDiffAccessor = {
 
 const ordinalScaleObj = {
   domain: ["Wheel Speed Diff (kph)", "RR and RL"],
-  range: ["", "#CC0000"],
+  range: ["", "yellow"],
 };
 
 const ChartBackground = ({ height }) => {
@@ -64,7 +64,7 @@ const WheelSpeedDiffChart = ({ data, height = 400 }) => {
         ></Axis>
         <LineSeries
           dataKey="speeddiff"
-          stroke="#CC0000"
+          stroke="yellow"
           data={data}
           {...speedDiffAccessor}
         />
