@@ -24,7 +24,7 @@ const CarChasis = ({ carDamage, suspensionDamage, tyreCoreTemp }) => {
   };
 
   const tyreColor = "#131313";
-  const tyreTreadColor = "#4a4a4a";
+  const tyreTreadColor = "#303030";
 
   return (
     <svg version="1.1" viewBox="0 0 250 250">
