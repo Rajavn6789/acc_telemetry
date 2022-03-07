@@ -26,6 +26,7 @@ import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
   GithubOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -118,10 +119,6 @@ function App() {
     return () => webSocket.current.close();
   }, []);
 
-  // Car Damage
-  const carDamage = recentData.carDamage || [0, 0, 0, 0, 0];
-  const suspensionDamage = recentData.suspensionDamage || [0, 0, 0, 0];
-  const tyreCoreTemp = recentData.tyreCoreTemp || [0, 0, 0, 0];
 
   const getRecentData = (data, key, defaultVal = 0) => {
     let output;
@@ -135,6 +132,10 @@ function App() {
 
   const handleViewChange = (key) => {
     setCurrView(key);
+  };
+
+  const handleRefreshPage = (key) => {
+    window.location.reload(false);
   };
 
   const renderCharts = () => {
@@ -182,6 +183,10 @@ function App() {
     return element;
   };
 
+    const carDamage = recentData.carDamage || [0, 0, 0, 0, 0];
+    const suspensionDamage = recentData.suspensionDamage || [0, 0, 0, 0];
+    const tyreCoreTemp = recentData.tyreCoreTemp || [0, 0, 0, 0];  
+
   return (
     <>
       <Layout hasSider>
@@ -213,12 +218,25 @@ function App() {
               )}
             </div>
             <div>
-              <span style={{ marginRight: 4 }}>ACC Telemetry:</span>
+              <span style={{ marginRight: 4 }}>Engine:</span>
               {accStatus === "online" ? (
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
               ) : (
                 <CloseCircleTwoTone twoToneColor="red" />
               )}
+            </div>
+            <div>
+              <span style={{ marginRight: 4 }}>Telemetry:</span>
+              {accStatus === "online" ? (
+                <CheckCircleTwoTone twoToneColor="#52c41a" />
+              ) : (
+                <CloseCircleTwoTone twoToneColor="red" />
+              )}
+            </div>
+            <div style={{marginTop: 8}}>
+              <Button type="dashed" size="small" onClick={handleRefreshPage}>
+                Refresh
+              </Button>
             </div>
           </div>
           <Divider style={{ margin: "24px 0" }}>Info</Divider>
