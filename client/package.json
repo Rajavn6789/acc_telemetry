@@ -1,6 +1,6 @@
 {
   "name": "acc-telemetry",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "author": "Rajavenkateshwaran S <rajavn6789@gmail.com>",
   "description": "A simple telemetry tool for ACC",

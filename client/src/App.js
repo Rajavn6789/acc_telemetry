@@ -204,7 +204,7 @@ function App() {
         >
           <div className="logo-container">
             <span className="logo">ACCTelemetry</span>
-            <span className="sub">v1.0</span>
+            <span className="sub">v2.0.0</span>
           </div>
           <Divider style={{ margin: "24px 0" }}>Connection</Divider>
           <div className="connection-info">
