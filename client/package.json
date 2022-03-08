@@ -11,6 +11,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "electron": "wait-on http://localhost:3000 && electron .",
+    "electron:dev": "concurrently \"npm start\" \"npm run electron\"",
     "package": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js"
   },
   "dependencies": {
@@ -31,9 +33,12 @@
     "websocket": "^1.0.34"
   },
   "devDependencies": {
+    "@electron/remote": "^2.0.5",
+    "concurrently": "^7.0.0",
     "electron": "^17.0.1",
     "electron-builder": "^22.14.13",
-    "electron-is-dev": "^2.0.0"
+    "electron-is-dev": "^2.0.0",
+    "wait-on": "^6.0.1"
   },
   "eslintConfig": {
     "extends": [

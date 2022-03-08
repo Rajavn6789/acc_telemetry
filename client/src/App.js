@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+// how to import the remote module in a React component?
+
 import { Layout, Menu, Button, Divider } from "antd";
 import CarChasis from "./components/CarChasis";
 import GasBrakeChart from "./components/GasBrakeChart";
@@ -19,7 +21,6 @@ import WheelIcon from "./assets/icons/wheel";
 import TurboIcon from "./assets/icons/turbo";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./App.css";
-
 import {
   LineChartOutlined,
   BarChartOutlined,
@@ -29,8 +30,17 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons";
 
+let ipcRenderer;
+if ("require" in window) {
+  const electron = window.require("electron");
+  ipcRenderer = electron.ipcRenderer;
+} else {
+  ipcRenderer = null;
+}
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+const MenuItemGroup = Menu.ItemGroup;
 
 const maxItems = 300;
 
@@ -134,7 +144,11 @@ function App() {
   };
 
   const handleRefreshPage = (key) => {
-    window.location.reload(false);
+    if (ipcRenderer) {
+      ipcRenderer.send("window-force-reload");
+    } else {
+      window.location.reload();
+    }
   };
 
   const renderCharts = () => {
@@ -234,7 +248,12 @@ function App() {
               )}
             </div>
             <div style={{ marginTop: 8 }}>
-              <Button type="dashed" size="small" onClick={handleRefreshPage}>
+              <Button
+                id="refresh-app"
+                type="dashed"
+                size="small"
+                onClick={handleRefreshPage}
+              >
                 Refresh
               </Button>
             </div>
@@ -259,7 +278,7 @@ function App() {
           <GforceChart accG={getRecentData(data, "accG")} />
           <Divider style={{ margin: "24px 0" }}>Contact</Divider>
           <div style={{ padding: "0px 32px" }}>
-            Send your suggestions/feedbacks to rajavn6789@gmail.com
+            <p>Thanks for using this tool. Send your suggestions/feedbacks to rajavn6789@gmail.com</p>
           </div>
           {/* <Divider style={{margin: "32px 0"}}>Track</Divider>
           <Suzuka
@@ -278,7 +297,9 @@ function App() {
           >
             <Menu
               theme="dark"
-              style={{ background: "#292c30" }}
+              style={{ background: "#292c30",
+              width: 'calc(100% - 300px)'
+            }}
               mode="horizontal"
               defaultSelectedKeys={[currView]}
             >
@@ -310,7 +331,11 @@ function App() {
               >
                 Turbo
               </Menu.Item>
-              <Menu.Item key="github" icon={<GithubOutlined />}>
+              <Menu.Item
+                key="github"
+                icon={<GithubOutlined />}
+                style={{ marginLeft: "auto" }}
+              >
                 <a
                   href="https://github.com/Rajavn6789/acc_telemetry"
                   target="_blank"

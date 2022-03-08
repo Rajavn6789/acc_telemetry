@@ -2,22 +2,32 @@
 const { app, BrowserWindow, protocol } = require("electron");
 const path = require("path");
 const url = require("url");
-const electron = require('electron');
+const electron = require("electron");
+
+
+const { ipcMain } = electron;
+
 
 // Create the native browser window.
 function createWindow() {
-  const mainWindow = new BrowserWindow({
-    // Set the path of an additional "preload" script that can be used to
-    // communicate between node-land and browser-land.
+  let mainWindow = new BrowserWindow({
+    show: false,
+    autoHideMenuBar: true,
+    backgroundColor: "black",
     webPreferences: {
+      // Set the path of an additional "preload" script that can be used to
+      // communicate between node-land and browser-land.
       preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
+      contextIsolation: false,
     },
   });
 
-  mainWindow.webContents.on('new-window', function(e, url) {
-    e.preventDefault();
-    electron.shell.openExternal(url);
-  });
+  mainWindow.maximize();
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  })
 
   // In production, set the initial browser path to the local bundle generated
   // by the Create React App build process.
@@ -29,7 +39,17 @@ function createWindow() {
         slashes: true,
       })
     : "http://localhost:3000";
+
   mainWindow.loadURL(appURL);
+
+  mainWindow.webContents.on("new-window", function (e, url) {
+    e.preventDefault();
+    electron.shell.openExternal(url);
+  });
+
+  ipcMain.on("window-force-reload", function () {
+    mainWindow.reload();
+  });
 
   // Automatically open Chrome's DevTools in development mode.
   if (!app.isPackaged) {
