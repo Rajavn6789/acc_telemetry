@@ -172,8 +172,9 @@ function App() {
       element = (
         <>
           <GasBrakeChart data={data} />
-          <RPMChart data={data} height={400} />
+          <RPMChart data={data} height={300} />
           <TurboBoostChart data={data} height={500} />
+          <GEARChart data={data} />
         </>
       );
     } else {
