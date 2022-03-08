@@ -13,12 +13,22 @@ This tool doesn't persist data for offline analysis and all the data you see is 
 - Gear Graph -  to understand gear shift patterns.
 - Suspension travel Graph - to monitor suspension travel.
 - WheelSpeed Graph - to monitor rear wheel speeds and helps to adjust differential preloads
-- Damage Indicator - to view damage on front, rear, left and right
+- WheelSpeedDiff Graph - shows the difference in real wheel speeds.
+- TurboBoost Graph - To monitor the turbo and turbo lag e.t.c.
+- Car Chasis - Displays Tyre Core Temp, Body damage and suspension damage. 
 - GForce meter - to view gforce transition during braking, acclerating and while turning left or right.
 
-#### UI Screens
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/basic-graphs.png)
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/advanced-graphs.png)
+### UI Screens
+#### Basic
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/basic.png)
+#### Suspension
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/suspension.png)
+#### Wheel
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/wheel.png)
+#### Turbo 
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/turbo.png)
+#### Damage Indicator 
+![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/carchasis.png)
 
 
 ### Requirements
@@ -43,6 +53,8 @@ Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48
 1. Run the ACCTelemetry-server.exe
 2. Install ACCTelemetry-installer.exe
 3. Open ACC and start the engine.
+
+> While installing choose runanyway option if app gets blocked by Microsoft Defender. For Defender to recognise the app properly would require buying signed certificates which is currently out of my budget. Incase of doubt entire app is open source feel free to the read or contribute to the source code.
 
 
 #### b) Start in local
@@ -77,4 +89,4 @@ If something not working as expected or want to provide feedback feel free to us
 - [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper)
 
 ### License
-MIT
+Apache-2.0 License
