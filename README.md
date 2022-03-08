@@ -2,62 +2,54 @@
 ### Introduction
 ACC Telemetry helps to visualizes the realtime [Assetto Corsa Compitizione](https://www.assettocorsa.it/competizione/) HUD data via graphs. It includes all the items in the ACC HUD along with suspension travel, wheel speed, Damage indicator and Gforce indicator.
 
-This tool doesn't persist data for offline analysis and all the data you see is realtime.
+This is a realtime telemetry tool and doesn't persist data for post analysis.
 
 #### Graphs
-- Force Feedback Graph -  to monitor and fix FFB clipping.
-- Throttle-Brake Graph - to monitor throttle brake overlapping.
-- ABS-TC Graph -  to understand when and how long ABS or TC is getting triggered.
-- Speed Graph -  to monitor the speed.
-- RPM Graph -  to monitor engine revs.
-- Gear Graph -  to understand gear shift patterns.
-- Suspension travel Graph - to monitor suspension travel.
-- WheelSpeed Graph - to monitor rear wheel speeds and helps to adjust differential preloads
-- WheelSpeedDiff Graph - shows the difference in real wheel speeds.
-- TurboBoost Graph - To monitor the turbo and turbo lag e.t.c.
-- Car Chasis - Displays Tyre Core Temp, Body damage and suspension damage. 
-- GForce meter - to view gforce transition during braking, acclerating and while turning left or right.
+- Force Feedback Graph
+- Throttle+Brake Graph
+- ABS+TC Graph
+- Speed Graph
+- RPM Graph
+- Gear Graph
+- Suspension travel Graph
+- WheelSpeed Graph
+- WheelSpeedDiff Graph
+- TurboBoost Graph
+- Tyre Core Temp
+- Body damage and suspension damage. 
+- GForce meter
 
 ### UI Screens
-#### Basic
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/basic.png)
-#### Suspension
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/suspension.png)
-#### Wheel
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/wheel.png)
-#### Turbo 
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/turbo.png)
-#### Damage Indicator 
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/carchasis.png)
-
-
-### Requirements
-- Windows Machine to consume shared memory module.
-- ACC game running.
+#### Basic Graphs
+![](/client/public/assets/basic.png)
+#### Suspension Graph
+![](/client/public/assets/suspension.png)
+#### Wheel Graphs
+![](/client/public/assets/wheel.png)
+#### Turbo Graph
+![](/client/public/assets/turbo.png)
+#### Damage and Gforce Indicator 
+![](/client/public/assets/damage_gforce_indicator.png)
 
 
 ### Architecture
-![](https://github.com/Rajavn6789/acc_telemetry/blob/main/client/public/assets/architecture.png)
+![](/client/public/assets/architecture.png)
 
-
-### Components
-- ACCTelemetry-server - CLI based application which reads the telemetry data from ACC shared memory.
-- ACCTelemetry- UI - UI that receives the data from server and displays the data via charts, visualisations.
 
 ### Running the App
 There are two options
 
-#### a) Download and Run from racedepartment
-Visit [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48871), download and extract the AccTelemetry.zip file
+#### a) Download and Run the exe
+Download and extract the source code from the [latest release](https://github.com/Rajavn6789/acc_telemetry/releases) or from [Racedepartment](https://www.racedepartment.com/downloads/acc-telemetry.48871)
 
-1. Run the ACCTelemetry-server.exe
-2. Install ACCTelemetry-installer.exe
+1. Run the ACCTelemetry-server-V2.0.0.exe
+2. Install the ACCTelemetry-installer-V2.0.0.exe
 3. Open ACC and start the engine.
 
-> While installing choose runanyway option if app gets blocked by Microsoft Defender. For Defender to recognise the app properly would require buying signed certificates which is currently out of my budget. Incase of doubt entire app is open source feel free to the read or contribute to the source code.
+> While installing choose run anyway option if app gets blocked by Microsoft Defender. For Defender to recognise the app properly would require buying signed certificates which is currently out of my budget. Incase of doubt entire app is open source feel free to the read or contribute to the source code.
 
 
-#### b) Start in local
+#### b) Build and Run the source code
 1. Clone the repo
 ```sh
 git clone https://github.com/Rajavn6789/acc_telemetry.git
@@ -80,13 +72,13 @@ Visit [http://localhost:3000](http://localhost:3000) to view the UI
 
 
 ### Troubleshooting
-- If Server is showing offline, reload the browser.
-- If ACC Telemetry is showing offline, turn on the engine.
+- Telemetry not showing up, make sure Server, Engine and Telemetry all the three are green.
+- Server offline, make sure the ACCTelemetry-server is running and click the refresh button.
+- Engine/Telemetry is showing offline, Turn on the car engine.
 
-If something not working as expected or want to provide feedback feel free to use the issue section of the repo
 
-### References 
+### Thanks
 - [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper)
 
 ### License
-Apache-2.0 License
+[Apache-2.0 License](/LICENSE)
