@@ -70,15 +70,14 @@ npm start
 ```
 Visit [http://localhost:3000](http://localhost:3000) to view the UI
 
-
 ### Troubleshooting
 - Telemetry not showing up, make sure Server, Engine and Telemetry all the three are green.
 - Server offline, make sure the ACCTelemetry-server is running and click the refresh button.
 - Engine/Telemetry is showing offline, Turn on the car engine.
 
-
-### Thanks
-- [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper)
+### Thanks to
+- [acc-node-wrapper](https://github.com/FynniX/acc-node-wrapper) for the acc shared memory wrapper.
+- [mahsoommoosa42](https://github.com/mahsoommoosa42) for the chart suggestions/ideas.
 
 ### License
 [Apache-2.0 License](/LICENSE)
